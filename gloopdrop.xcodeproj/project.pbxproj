@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4C6A2D0125011F6D002BEC28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0025011F6D002BEC28 /* AppDelegate.swift */; };
-		4C6A2D0325011F6D002BEC28 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0225011F6D002BEC28 /* GameScene.sks */; };
-		4C6A2D0525011F6D002BEC28 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0425011F6D002BEC28 /* Actions.sks */; };
 		4C6A2D0725011F6D002BEC28 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0625011F6D002BEC28 /* GameScene.swift */; };
 		4C6A2D0925011F6D002BEC28 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0825011F6D002BEC28 /* GameViewController.swift */; };
 		4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0A25011F6D002BEC28 /* Main.storyboard */; };
@@ -20,8 +18,6 @@
 /* Begin PBXFileReference section */
 		4C6A2CFD25011F6D002BEC28 /* gloopdrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gloopdrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6A2D0025011F6D002BEC28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C6A2D0225011F6D002BEC28 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		4C6A2D0425011F6D002BEC28 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		4C6A2D0625011F6D002BEC28 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		4C6A2D0825011F6D002BEC28 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		4C6A2D0B25011F6D002BEC28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,8 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				4C6A2D0025011F6D002BEC28 /* AppDelegate.swift */,
-				4C6A2D0225011F6D002BEC28 /* GameScene.sks */,
-				4C6A2D0425011F6D002BEC28 /* Actions.sks */,
 				4C6A2D0625011F6D002BEC28 /* GameScene.swift */,
 				4C6A2D0825011F6D002BEC28 /* GameViewController.swift */,
 				4C6A2D0A25011F6D002BEC28 /* Main.storyboard */,
@@ -132,10 +126,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */,
-				4C6A2D0325011F6D002BEC28 /* GameScene.sks in Resources */,
 				4C6A2D0E25011F72002BEC28 /* Assets.xcassets in Resources */,
 				4C6A2D1125011F72002BEC28 /* LaunchScreen.storyboard in Resources */,
-				4C6A2D0525011F6D002BEC28 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +287,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K5ZJLTFVCL;
 				INFOPLIST_FILE = gloopdrop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,6 +306,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K5ZJLTFVCL;
 				INFOPLIST_FILE = gloopdrop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
