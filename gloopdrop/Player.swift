@@ -15,15 +15,15 @@ enum PlayerAnimationType: String {
 }
 
 // enum to switch player direction
-enum PlayerDirection {
-    case left
-    case right
-}
+//enum PlayerDirection {
+//    case left
+//    case right
+//}
 
 class Player: SKSpriteNode {
     // MARK: - Properties
     private var walkTextures: [SKTexture]?
-    private var walkingSpeed = 0.25
+    private var walkingSpeed = 0.15
 
     // MARK: - Init
     init() {
@@ -75,14 +75,14 @@ class Player: SKSpriteNode {
     ///   - position: The position to move the sprite to
     ///   - direction: The direction the sprite is facing
     ///   - speed: The speed at which the sprite moves to the new position
-    func moveTo(_ position: CGPoint, direction: PlayerDirection, speed: TimeInterval) {
-        switch direction {
-            case .left:
-                xScale = -abs(xScale)
-            case .right:
-                xScale = abs(xScale)
-        }
-        let moveAction = SKAction.move(to: position, duration: speed)
-        run(moveAction)
-    }
+//    func moveTo(_ position: CGPoint, direction: PlayerDirection, speed: TimeInterval) {
+//        switch direction {
+//            case .left:
+//                xScale = -abs(xScale)
+//            case .right:
+//                xScale = abs(xScale)
+//        }
+//        let moveAction = SKAction.move(to: position, duration: speed)
+//        run(moveAction)
+//    }
 }

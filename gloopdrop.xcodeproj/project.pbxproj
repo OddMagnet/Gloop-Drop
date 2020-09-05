@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CC25026CEB00FCB4AB /* Player.swift */; };
 		4C1AF1CF25026D5700FCB4AB /* SpriteKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */; };
+		4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A604B2503C13500E66BCD /* Collectible.swift */; };
 		4C6A2D0125011F6D002BEC28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0025011F6D002BEC28 /* AppDelegate.swift */; };
 		4C6A2D0725011F6D002BEC28 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0625011F6D002BEC28 /* GameScene.swift */; };
 		4C6A2D0925011F6D002BEC28 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0825011F6D002BEC28 /* GameViewController.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		4C1AF1CC25026CEB00FCB4AB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitHelper.swift; sourceTree = "<group>"; };
+		4C3A604B2503C13500E66BCD /* Collectible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
 		4C6A2CFD25011F6D002BEC28 /* gloopdrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gloopdrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6A2D0025011F6D002BEC28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C6A2D0625011F6D002BEC28 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				4C6A2D0625011F6D002BEC28 /* GameScene.swift */,
 				4C6A2D0825011F6D002BEC28 /* GameViewController.swift */,
 				4C1AF1CC25026CEB00FCB4AB /* Player.swift */,
+				4C3A604B2503C13500E66BCD /* Collectible.swift */,
 				4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */,
 				4C6A2D0A25011F6D002BEC28 /* Main.storyboard */,
 				4C6A2D0D25011F72002BEC28 /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 			files = (
 				4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */,
 				4C6A2D0725011F6D002BEC28 /* GameScene.swift in Sources */,
+				4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */,
 				4C6A2D0925011F6D002BEC28 /* GameViewController.swift in Sources */,
 				4C1AF1CF25026D5700FCB4AB /* SpriteKitHelper.swift in Sources */,
 				4C6A2D0125011F6D002BEC28 /* AppDelegate.swift in Sources */,
