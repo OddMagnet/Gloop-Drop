@@ -16,6 +16,7 @@
 		4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0A25011F6D002BEC28 /* Main.storyboard */; };
 		4C6A2D0E25011F72002BEC28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0D25011F72002BEC28 /* Assets.xcassets */; };
 		4C6A2D1125011F72002BEC28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0F25011F72002BEC28 /* LaunchScreen.storyboard */; };
+		4CA301B12504E31B00C070CE /* GameScene+PhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4C6A2D0D25011F72002BEC28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C6A2D1025011F72002BEC28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C6A2D1225011F72002BEC28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+PhysicsContact.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				4C6A2D0025011F6D002BEC28 /* AppDelegate.swift */,
 				4C6A2D0625011F6D002BEC28 /* GameScene.swift */,
+				4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */,
 				4C6A2D0825011F6D002BEC28 /* GameViewController.swift */,
 				4C1AF1CC25026CEB00FCB4AB /* Player.swift */,
 				4C3A604B2503C13500E66BCD /* Collectible.swift */,
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CA301B12504E31B00C070CE /* GameScene+PhysicsContact.swift in Sources */,
 				4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */,
 				4C6A2D0725011F6D002BEC28 /* GameScene.swift in Sources */,
 				4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */,

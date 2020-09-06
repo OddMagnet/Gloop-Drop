@@ -18,8 +18,8 @@ enum CollectibleType: String {
 class Collectible: SKSpriteNode {
     // MARK: - Properties
     private var collectibleType: CollectibleType = .none
-    private var height: CGFloat? { texture?.size().height }
-    private var width: CGFloat? { texture?.size().width }
+    private var height: CGFloat { texture?.size().height ?? 0 }
+    private var width: CGFloat { texture?.size().width ?? 0 }
 
     // MARK: - Init
     init(collectibleType: CollectibleType) {
@@ -41,6 +41,15 @@ class Collectible: SKSpriteNode {
         self.name = "co_\(collectibleType)"
         self.anchorPoint = CGPoint(x: 0.5, y: 1.0)
         self.zPosition = Layer.collectible.rawValue
+
+        // Add physics body
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size, center: CGPoint(x: 0.0, y: -self.height / 2))
+        self.physicsBody?.affectedByGravity = false
+
+        // set up physics categories for contact
+        self.physicsBody?.categoryBitMask = PhysicsCategory.collectible                             // set the category the collectible belongs to
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.player | PhysicsCategory.foreground  // only care about contact with player or foreground
+        self.physicsBody?.collisionBitMask = PhysicsCategory.none                                   // ignore collisions completely
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -53,7 +62,7 @@ class Collectible: SKSpriteNode {
     ///   - dropSpeed: The speed at which the collectible drops
     ///   - floorLevel: The point on the Y-Axis where the collectible hits the floor
     func drop(dropSpeed: TimeInterval, floorLevel: CGFloat) {
-        let pos = CGPoint(x: position.x, y: floorLevel + (self.height ?? 0))
+        let pos = CGPoint(x: position.x, y: floorLevel + (self.height))
         let scaleX = SKAction.scaleX(to: 1.0, duration: 1.0)
         let scaleY = SKAction.scaleY(to: 1.3, duration: 1.0)
 
@@ -66,5 +75,19 @@ class Collectible: SKSpriteNode {
         // shrink first, then run action sequence
         self.scale(to: CGSize(width: 0.25, height: 1.0))
         self.run(actionSequence, withKey: "drop")
+    }
+
+    /// Removes a drop from the scene
+    func remove() {
+        let removeFromParent = SKAction.removeFromParent()
+        self.run(removeFromParent)
+    }
+
+    func collected() {
+        self.remove()
+    }
+
+    func missed() {
+        self.remove()
     }
 }

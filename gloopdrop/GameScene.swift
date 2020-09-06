@@ -43,6 +43,9 @@ class GameScene: SKScene {
 
     // MARK: - Init
     override func didMove(to view: SKView) {
+        // set up the physics world contact delegate
+        physicsWorld.contactDelegate = self
+        
         // set up background
         let background = SKSpriteNode(imageNamed: "background_1")
         background.anchorPoint = .zero
@@ -55,7 +58,15 @@ class GameScene: SKScene {
         foreground.anchorPoint = .zero
         foreground.zPosition = Layer.foreground.rawValue
         foreground.position = .zero
+        // add physics body
+        foreground.physicsBody = SKPhysicsBody(edgeLoopFrom: foreground.frame)
+        foreground.physicsBody?.affectedByGravity = false
         addChild(foreground)
+
+        // set up physics categories for contacts
+        foreground.physicsBody?.categoryBitMask = PhysicsCategory.foreground        // set the category the foreground belongs to
+        foreground.physicsBody?.contactTestBitMask = PhysicsCategory.collectible    // only care about conact with collectibles
+        foreground.physicsBody?.collisionBitMask = PhysicsCategory.none             // ignore collisions completely
 
         // set up player
         // initially place the player sprite centered horizontally and on top of the foreground node

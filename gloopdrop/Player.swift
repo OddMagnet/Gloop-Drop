@@ -24,6 +24,8 @@ class Player: SKSpriteNode {
     // MARK: - Properties
     private var walkTextures: [SKTexture]?
     private var walkingSpeed = 0.15
+    private var height: CGFloat { texture?.size().height ?? 0 }
+    private var width: CGFloat { texture?.size().width ?? 0 }
 
     // MARK: - Init
     init() {
@@ -41,6 +43,15 @@ class Player: SKSpriteNode {
         self.setScale(1.0)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.0) // center bottom
         self.zPosition = Layer.player.rawValue
+
+        // Add physics body
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size, center: CGPoint(x: 0.0, y: self.height / 2))
+        self.physicsBody?.affectedByGravity = false
+
+        // set up physics categories for contacts
+        self.physicsBody?.categoryBitMask = PhysicsCategory.player          // set the category the player belongs to
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.collectible  // only care about contact with collectibles
+        self.physicsBody?.collisionBitMask = PhysicsCategory.none           // ignore collisions completely
     }
 
     required init?(coder aDecoder: NSCoder) {
