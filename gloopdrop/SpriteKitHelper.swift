@@ -16,6 +16,7 @@ enum Layer: CGFloat {
     case foreground
     case player
     case collectible
+    case ui
 }
 
 // set up physics categories
@@ -72,5 +73,19 @@ extension SKSpriteNode {
                 run(repeatAction, withKey: name)
             }
         }
+    }
+}
+
+// MARK: - SKScene extensions
+extension SKScene {
+    /// Returns the value of the top point of the view in the scene
+    func viewTop() -> CGFloat {
+        return convertPoint(fromView: CGPoint(x: 0.0, y: 0)).y
+    }
+
+    /// Returns the value of the bottom point of the view in the scene
+    func viewBottom() -> CGFloat {
+        guard let view = view else { return 0.0 }
+        return convertPoint(fromView: CGPoint(x: 0.0, y: view.bounds.size.height)).y
     }
 }

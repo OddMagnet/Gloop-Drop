@@ -11,13 +11,30 @@ import GameplayKit
 
 class GameScene: SKScene {
     // MARK: - Properties
+    // Player
     let player = Player()
     let playerMovementSpeed: CGFloat = 1.5
     var movingPlayer = false
     var lastPosition: CGPoint?
-    var level: Int = 1
+    // Game
+    var gameInProgess = false
+    var level: Int = 1 {
+        didSet {
+            levelLabel.text = "Level \(level)"
+        }
+    }
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.text = "Score \(score)"
+        }
+    }
     var minDropSpeed: CGFloat = 0.12    // fastest drop speed
     var maxDropSpeed: CGFloat = 1.0     // slowest drop speed
+    var dropsExpected: Int { return numberOfDrops }
+    var dropsCollected: Int = 0
+    // Labels
+    var scoreLabel: SKLabelNode = SKLabelNode()
+    var levelLabel: SKLabelNode = SKLabelNode()
 
     // MARK: - Computed properties
     var numberOfDrops: Int {
@@ -68,20 +85,109 @@ class GameScene: SKScene {
         foreground.physicsBody?.contactTestBitMask = PhysicsCategory.collectible    // only care about conact with collectibles
         foreground.physicsBody?.collisionBitMask = PhysicsCategory.none             // ignore collisions completely
 
+        // set up user interface
+        setUpLabels()
+
         // set up player
         // initially place the player sprite centered horizontally and on top of the foreground node
         player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
         player.setUpConstraints(floor: foreground.frame.maxY)
         addChild(player)
         // start up the player animation
-        player.walk()
+//        player.walk()
 
         // set up game
-        spawnMultipleGloops()
+//        spawnMultipleGloops()
+
+        // show message
+        showMessage("Tap to start the game")
+
+    }
+
+    func setUpLabels() {
+        // Score label
+        scoreLabel.name = "score"
+        scoreLabel.fontName = "Nosifer"
+        scoreLabel.fontColor = .yellow
+        scoreLabel.fontSize = 35.0
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.verticalAlignmentMode = .center
+        scoreLabel.zPosition = Layer.ui.rawValue
+        scoreLabel.position = CGPoint(x: frame.maxX - 50, y: viewTop() - 100)
+
+        // set the text and add label to scene
+        scoreLabel.text = "Score: \(score)"
+        addChild(scoreLabel)
+
+        // Level label
+        levelLabel.name = "level"
+        levelLabel.fontName = "Nosifer"
+        levelLabel.fontColor = .yellow
+        levelLabel.fontSize = 35.0
+        levelLabel.horizontalAlignmentMode = .left
+        levelLabel.verticalAlignmentMode = .center
+        levelLabel.zPosition = Layer.ui.rawValue
+        levelLabel.position = CGPoint(x: frame.minX + 50, y: viewTop() - 100)
+
+        // set the text and add label to scene
+        levelLabel.text = "Level \(level)"
+        addChild(levelLabel)
+    }
+
+    func showMessage(_ message: String) {
+        // set up message label
+        let messageLabel = SKLabelNode()
+        messageLabel.name = "message"
+        messageLabel.position = CGPoint(x: frame.midX, y: player.frame.maxY + 100)
+        messageLabel.zPosition = Layer.ui.rawValue
+        messageLabel.numberOfLines = 2
+
+        // set up attributed text
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: SKColor(red: 251.0 / 255.0,
+                                      green: 155.0 / 255.0,
+                                      blue: 24.0 / 255.0,
+                                      alpha: 1.0),
+            .backgroundColor: UIColor.clear,
+            .font: UIFont(name: "Nosifer", size: 45.0)!,
+            .paragraphStyle: paragraph
+        ]
+        messageLabel.attributedText = NSAttributedString(string: message, attributes: attributes)
+
+        // add the label to the scene with a fade action
+        messageLabel.run(.fadeIn(withDuration: 0.25))
+        addChild(messageLabel)
+    }
+
+    func hideMessage() {
+        // remove message label if it exists
+        enumerateChildNodes(withName: "//message") { (node, _) in
+            node.run(.sequence([
+                .fadeOut(withDuration: 0.25),
+                .removeFromParent()
+            ]))
+        }
+//        if let messageLabel = childNode(withName: "//message") as? SKLabelNode {
+//            messageLabel.run(.sequence([
+//                .fadeOut(withDuration: 0.25),
+//                .removeFromParent()
+//            ]))
+//        }
     }
 
     // MARK: - Game functions
     func spawnMultipleGloops() {
+        // start the player walking animation
+        player.walk()
+
+        // reset level and score
+        if gameInProgess == false {
+            score = 0
+            level = 1
+        }
+
         // set up repeating action
         let wait = SKAction.wait(forDuration: TimeInterval(dropSpeed))
         let spawn = SKAction.run { [unowned self] in
@@ -91,7 +197,13 @@ class GameScene: SKScene {
         let repeatAction = SKAction.repeat(sequence, count: numberOfDrops)
 
         // run action
-        run(repeatAction)
+        run(repeatAction, withKey: "gloop")
+
+        // update game state
+        gameInProgess = true
+
+        // hide message
+        hideMessage()
     }
 
     func spawnGloop() {
@@ -108,6 +220,75 @@ class GameScene: SKScene {
         collectible.drop(dropSpeed: 1.0, floorLevel: player.frame.minY)
     }
 
+    func checkForRemainingDrops() {
+        if dropsCollected == dropsExpected {
+            print("next level")
+            nextLevel()
+        }
+    }
+
+    func nextLevel() {
+        // show message
+        showMessage("Get ready!")
+
+        let wait = SKAction.wait(forDuration: 2.25)
+        run(wait, completion: { [unowned self] in
+            self.level += 1
+            self.spawnMultipleGloops()
+        })
+    }
+
+    func gameOver() {
+        // show message
+        showMessage("Game Over\nTap to try again")
+
+        // update game state
+        gameInProgess = false
+
+        // start the player die animation
+        player.die()
+
+        // stop collectibles from spawning
+        removeAction(forKey: "gloop")
+
+        // check all child node, stop actions on collectibles
+        enumerateChildNodes(withName: "//co_*") { (node, _) in
+            // Stop and remove drops
+            node.removeAction(forKey: "drop")
+            node.physicsBody = nil
+        }
+
+        // Reset game
+        resetPlayerPosition()
+        popRemainingDrops()
+        dropsCollected = 0
+    }
+
+    func resetPlayerPosition() {
+        let resetPoint = CGPoint(x: frame.midX, y: player.position.y)
+        let distance = hypot(resetPoint.x - player.position.x, 0)
+        let speed = TimeInterval(distance / (playerMovementSpeed * 2)) / 255
+
+        player.moveTo(resetPoint,
+                      direction: player.position.x > frame.midX
+                        ? .left
+                        : .right,
+                      speed: speed)
+    }
+
+    func popRemainingDrops() {
+        var i = 0
+        enumerateChildNodes(withName: "//co_*") { (node, stop) in
+            // pop remaining drops in sequence
+            let initialWait = SKAction.wait(forDuration: 1.0)
+            let wait = SKAction.wait(forDuration: TimeInterval(0.15 * CGFloat(i)))
+            let removeFromParent = SKAction.removeFromParent()
+            let actionSequence = SKAction.sequence([initialWait, wait, removeFromParent])
+            node.run(actionSequence)
+            i += 1
+        }
+    }
+
     // MARK: - Touch input handling
     func touchDownAt(_ position: CGPoint) {
 //        // calculate necessary speed based on current and new position
@@ -117,6 +298,10 @@ class GameScene: SKScene {
 //            ? .left
 //            : .right
 //        player.moveTo(position, direction: direction, speed: speed)
+        if gameInProgess == false {
+            spawnMultipleGloops()
+            return
+        }
         let touchedNode = atPoint(position)
         if touchedNode.name == "player" {
             movingPlayer = true

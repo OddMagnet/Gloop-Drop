@@ -16,6 +16,7 @@
 		4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0A25011F6D002BEC28 /* Main.storyboard */; };
 		4C6A2D0E25011F72002BEC28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0D25011F72002BEC28 /* Assets.xcassets */; };
 		4C6A2D1125011F72002BEC28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0F25011F72002BEC28 /* LaunchScreen.storyboard */; };
+		4C74FE9425069C3100A9746A /* Nosifer-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74FE93250675BC00A9746A /* Nosifer-Regular.ttf */; };
 		4CA301B12504E31B00C070CE /* GameScene+PhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		4C6A2D0D25011F72002BEC28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C6A2D1025011F72002BEC28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C6A2D1225011F72002BEC28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C74FE93250675BC00A9746A /* Nosifer-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nosifer-Regular.ttf"; sourceTree = "<group>"; };
 		4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+PhysicsContact.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,11 +74,20 @@
 				4C3A604B2503C13500E66BCD /* Collectible.swift */,
 				4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */,
 				4C6A2D0A25011F6D002BEC28 /* Main.storyboard */,
+				4C74FE922506756F00A9746A /* Fonts */,
 				4C6A2D0D25011F72002BEC28 /* Assets.xcassets */,
 				4C6A2D0F25011F72002BEC28 /* LaunchScreen.storyboard */,
 				4C6A2D1225011F72002BEC28 /* Info.plist */,
 			);
 			path = gloopdrop;
+			sourceTree = "<group>";
+		};
+		4C74FE922506756F00A9746A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4C74FE93250675BC00A9746A /* Nosifer-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C74FE9425069C3100A9746A /* Nosifer-Regular.ttf in Resources */,
 				4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */,
 				4C6A2D0E25011F72002BEC28 /* Assets.xcassets in Resources */,
 				4C6A2D1125011F72002BEC28 /* LaunchScreen.storyboard in Resources */,
@@ -232,7 +244,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -286,7 +298,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -301,6 +313,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = K5ZJLTFVCL;
 				INFOPLIST_FILE = gloopdrop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -320,6 +333,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = K5ZJLTFVCL;
 				INFOPLIST_FILE = gloopdrop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

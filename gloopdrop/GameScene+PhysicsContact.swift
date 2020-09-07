@@ -23,6 +23,9 @@ extension GameScene: SKPhysicsContactDelegate {
         if collision == PhysicsCategory.collectible | PhysicsCategory.player {
             if let sprite = body as? Collectible {
                 sprite.collected()
+                dropsCollected += 1
+                score += level
+                checkForRemainingDrops()
             }
             print("Player hit collectible")
         }
@@ -30,6 +33,7 @@ extension GameScene: SKPhysicsContactDelegate {
         if collision == PhysicsCategory.foreground | PhysicsCategory.collectible {
             if let sprite = body as? Collectible {
                 sprite.missed()
+                gameOver()
             }
             print("Collectible hit foreground")
         }
