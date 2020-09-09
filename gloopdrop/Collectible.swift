@@ -20,6 +20,8 @@ class Collectible: SKSpriteNode {
     private var collectibleType: CollectibleType = .none
     private var height: CGFloat { texture?.size().height ?? 0 }
     private var width: CGFloat { texture?.size().width ?? 0 }
+    private var playCollectSound = SKAction.playSoundFileNamed("collect.wav", waitForCompletion: false)
+    private var playMissSound = SKAction.playSoundFileNamed("miss.wav", waitForCompletion: false)
 
     // MARK: - Init
     init(collectibleType: CollectibleType) {
@@ -77,17 +79,16 @@ class Collectible: SKSpriteNode {
         self.run(actionSequence, withKey: "drop")
     }
 
-    /// Removes a drop from the scene
-    func remove() {
-        let removeFromParent = SKAction.removeFromParent()
-        self.run(removeFromParent)
-    }
-
+    /// Removes a drop from the scene when it's collected
     func collected() {
-        self.remove()
+        let removeFromParent = SKAction.removeFromParent()
+        let actionGroup = SKAction.group([playCollectSound, removeFromParent])
+        self.run(actionGroup)
     }
 
     func missed() {
-        self.remove()
+        let removeFromParent = SKAction.removeFromParent()
+        let actionGroup = SKAction.group([playMissSound, removeFromParent])
+        self.run(actionGroup)
     }
 }

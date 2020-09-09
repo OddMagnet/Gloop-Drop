@@ -23,6 +23,7 @@
 		4C838E5525092F210050C92B /* blob_mumble-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E4F25092F210050C92B /* blob_mumble-2.wav */; };
 		4C838E5625092F210050C92B /* blob_mumble-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E5025092F210050C92B /* blob_mumble-3.wav */; };
 		4C838E5725092F210050C92B /* blob_mumble-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E5125092F210050C92B /* blob_mumble-1.wav */; };
+		4C838E5A2509312F0050C92B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E592509312F0050C92B /* music.mp3 */; };
 		4CA301B12504E31B00C070CE /* GameScene+PhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		4C838E4F25092F210050C92B /* blob_mumble-2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-2.wav"; sourceTree = "<group>"; };
 		4C838E5025092F210050C92B /* blob_mumble-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-3.wav"; sourceTree = "<group>"; };
 		4C838E5125092F210050C92B /* blob_mumble-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-1.wav"; sourceTree = "<group>"; };
+		4C838E592509312F0050C92B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+PhysicsContact.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +88,7 @@
 				4C3A604B2503C13500E66BCD /* Collectible.swift */,
 				4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */,
 				4C6A2D0A25011F6D002BEC28 /* Main.storyboard */,
+				4C838E582509312F0050C92B /* Music */,
 				4C838E4B25092F210050C92B /* Sounds */,
 				4C74FE922506756F00A9746A /* Fonts */,
 				4C6A2D0D25011F72002BEC28 /* Assets.xcassets */,
@@ -114,6 +117,14 @@
 				4C838E5125092F210050C92B /* blob_mumble-1.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		4C838E582509312F0050C92B /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				4C838E592509312F0050C92B /* music.mp3 */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 				4C838E5725092F210050C92B /* blob_mumble-1.wav in Resources */,
 				4C838E5225092F210050C92B /* bubbles.mp3 in Resources */,
 				4C6A2D1125011F72002BEC28 /* LaunchScreen.storyboard in Resources */,
+				4C838E5A2509312F0050C92B /* music.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
