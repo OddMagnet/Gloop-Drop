@@ -27,6 +27,25 @@ enum PhysicsCategory {
     static let foreground:  UInt32 = 0b100  // 4
 }
 
+// MARK: - SKNode extensions
+extension SKNode {
+    func setUpScrollingView(imageNamed name: String, layer: Layer, blocks: Int, speed: TimeInterval) {
+        // create sprite nodes and set their position based on their # and width
+        for i in 0..<blocks {
+            let spriteNode = SKSpriteNode(imageNamed: name)
+            spriteNode.anchorPoint = .zero
+            spriteNode.position = CGPoint(x: CGFloat(i) * spriteNode.size.width,
+                                          y: 0)
+            spriteNode.zPosition = layer.rawValue
+            spriteNode.name = name
+
+            // use custom extension to scroll
+            spriteNode.endlessScroll(speed: speed)
+            addChild(spriteNode)
+        }
+    }
+}
+
 // MARK: - SpriteKit extensions
 extension SKSpriteNode {
     /// Helper function to load an array of textures
@@ -48,7 +67,6 @@ extension SKSpriteNode {
 
         return textureArray
     }
-
 
     /// Creates an animation loop based on supplied parameters
     /// - Parameters:
@@ -73,6 +91,21 @@ extension SKSpriteNode {
                 run(repeatAction, withKey: name)
             }
         }
+    }
+
+    /// Creates an endless scrolling action and starts it
+    /// - Parameter speed: The speed of the scrolling
+    func endlessScroll(speed: TimeInterval) {
+        // set up actions for moving and resetting nodes
+        let moveAction = SKAction.moveBy(x: -self.size.width, y: 0, duration: speed)
+        let resetAction = SKAction.moveBy(x: self.size.width, y: 0, duration: 0.0)
+
+        // set up a sequence to repeat those actions
+        let sequenceAction = SKAction.sequence([moveAction, resetAction])
+        let repeatAction = SKAction.repeatForever(sequenceAction)
+
+        // finall run it
+        run(repeatAction)
     }
 }
 

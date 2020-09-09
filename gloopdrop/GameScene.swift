@@ -38,6 +38,7 @@ class GameScene: SKScene {
     var levelLabel: SKLabelNode = SKLabelNode()
     // Audio
     let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
+    let bubblesAudioNode = SKAudioNode(fileNamed: "bubbles.mp3")
 
     // MARK: - Computed properties
     var numberOfDrops: Int {
@@ -79,6 +80,12 @@ class GameScene: SKScene {
             self.musicAudioNode.run(SKAction.changeVolume(to: 0.75, duration: 2.0))
         })
 
+        // Run a delayed action to add bubble audio to the scene
+        run(SKAction.wait(forDuration: 1.5), completion:  { [unowned self] in
+            self.bubblesAudioNode.autoplayLooped = true
+            self.addChild(self.bubblesAudioNode)
+        })
+
         // set up the physics world contact delegate
         physicsWorld.contactDelegate = self
         
@@ -117,6 +124,9 @@ class GameScene: SKScene {
 
         // set up game
 //        spawnMultipleGloops()
+
+        // set up gloop flow
+        setUpGloopFlow()
 
         // show message
         showMessage("Tap to start the game")
@@ -194,6 +204,17 @@ class GameScene: SKScene {
 //                .removeFromParent()
 //            ]))
 //        }
+    }
+
+    // MARK: - Gloop Flow & Particle effects
+    func setUpGloopFlow() {
+        let gloopFlow = SKNode()
+        gloopFlow.name = "gloopFlow"
+        gloopFlow.zPosition = Layer.foreground.rawValue
+        gloopFlow.position = CGPoint(x: 0.0, y: -60.0)
+        // start endless scroll
+        gloopFlow.setUpScrollingView(imageNamed: "flow_1", layer: .foreground, blocks: 3, speed: 30.0)
+        addChild(gloopFlow)
     }
 
     // MARK: - Game functions
