@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameScene: SKScene {
     // MARK: - Properties
@@ -35,6 +36,8 @@ class GameScene: SKScene {
     // Labels
     var scoreLabel: SKLabelNode = SKLabelNode()
     var levelLabel: SKLabelNode = SKLabelNode()
+    // Audio
+    let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
 
     // MARK: - Computed properties
     var numberOfDrops: Int {
@@ -60,6 +63,22 @@ class GameScene: SKScene {
 
     // MARK: - Init
     override func didMove(to view: SKView) {
+        // decrease audio engine's volume for later fade-in
+        audioEngine.mainMixerNode.outputVolume = 0.0
+
+        // set up background music node
+        musicAudioNode.autoplayLooped = true
+        musicAudioNode.isPositional = false
+        // and add it to the scene
+        addChild(musicAudioNode)
+        // adjust its volume
+        musicAudioNode.run(SKAction.changeVolume(to: 0.0, duration: 0))
+        // then fade it in slowly
+        run(SKAction.wait(forDuration: 1.0), completion: { [unowned self] in
+            self.audioEngine.mainMixerNode.outputVolume = 1.0
+            self.musicAudioNode.run(SKAction.changeVolume(to: 0.75, duration: 2.0))
+        })
+
         // set up the physics world contact delegate
         physicsWorld.contactDelegate = self
         
