@@ -24,6 +24,7 @@
 		4C838E5625092F210050C92B /* blob_mumble-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E5025092F210050C92B /* blob_mumble-3.wav */; };
 		4C838E5725092F210050C92B /* blob_mumble-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E5125092F210050C92B /* blob_mumble-1.wav */; };
 		4C838E5A2509312F0050C92B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E592509312F0050C92B /* music.mp3 */; };
+		4C838E5C2509409F0050C92B /* GloopFlow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E5B2509409F0050C92B /* GloopFlow.sks */; };
 		4CA301B12504E31B00C070CE /* GameScene+PhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		4C838E5025092F210050C92B /* blob_mumble-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-3.wav"; sourceTree = "<group>"; };
 		4C838E5125092F210050C92B /* blob_mumble-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-1.wav"; sourceTree = "<group>"; };
 		4C838E592509312F0050C92B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		4C838E5B2509409F0050C92B /* GloopFlow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GloopFlow.sks; sourceTree = "<group>"; };
 		4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+PhysicsContact.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 				4C3A604B2503C13500E66BCD /* Collectible.swift */,
 				4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */,
 				4C6A2D0A25011F6D002BEC28 /* Main.storyboard */,
+				4C838E5B2509409F0050C92B /* GloopFlow.sks */,
 				4C838E582509312F0050C92B /* Music */,
 				4C838E4B25092F210050C92B /* Sounds */,
 				4C74FE922506756F00A9746A /* Fonts */,
@@ -186,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C74FE9425069C3100A9746A /* Nosifer-Regular.ttf in Resources */,
+				4C838E5C2509409F0050C92B /* GloopFlow.sks in Resources */,
 				4C838E5425092F210050C92B /* miss.wav in Resources */,
 				4C838E5325092F210050C92B /* collect.wav in Resources */,
 				4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */,
