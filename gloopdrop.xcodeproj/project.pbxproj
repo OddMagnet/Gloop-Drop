@@ -17,6 +17,12 @@
 		4C6A2D0E25011F72002BEC28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0D25011F72002BEC28 /* Assets.xcassets */; };
 		4C6A2D1125011F72002BEC28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A2D0F25011F72002BEC28 /* LaunchScreen.storyboard */; };
 		4C74FE9425069C3100A9746A /* Nosifer-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74FE93250675BC00A9746A /* Nosifer-Regular.ttf */; };
+		4C838E5225092F210050C92B /* bubbles.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E4C25092F210050C92B /* bubbles.mp3 */; };
+		4C838E5325092F210050C92B /* collect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E4D25092F210050C92B /* collect.wav */; };
+		4C838E5425092F210050C92B /* miss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E4E25092F210050C92B /* miss.wav */; };
+		4C838E5525092F210050C92B /* blob_mumble-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E4F25092F210050C92B /* blob_mumble-2.wav */; };
+		4C838E5625092F210050C92B /* blob_mumble-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E5025092F210050C92B /* blob_mumble-3.wav */; };
+		4C838E5725092F210050C92B /* blob_mumble-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C838E5125092F210050C92B /* blob_mumble-1.wav */; };
 		4CA301B12504E31B00C070CE /* GameScene+PhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +39,12 @@
 		4C6A2D1025011F72002BEC28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C6A2D1225011F72002BEC28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C74FE93250675BC00A9746A /* Nosifer-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nosifer-Regular.ttf"; sourceTree = "<group>"; };
+		4C838E4C25092F210050C92B /* bubbles.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubbles.mp3; sourceTree = "<group>"; };
+		4C838E4D25092F210050C92B /* collect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collect.wav; sourceTree = "<group>"; };
+		4C838E4E25092F210050C92B /* miss.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = miss.wav; sourceTree = "<group>"; };
+		4C838E4F25092F210050C92B /* blob_mumble-2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-2.wav"; sourceTree = "<group>"; };
+		4C838E5025092F210050C92B /* blob_mumble-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-3.wav"; sourceTree = "<group>"; };
+		4C838E5125092F210050C92B /* blob_mumble-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blob_mumble-1.wav"; sourceTree = "<group>"; };
 		4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+PhysicsContact.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +86,7 @@
 				4C3A604B2503C13500E66BCD /* Collectible.swift */,
 				4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */,
 				4C6A2D0A25011F6D002BEC28 /* Main.storyboard */,
+				4C838E4B25092F210050C92B /* Sounds */,
 				4C74FE922506756F00A9746A /* Fonts */,
 				4C6A2D0D25011F72002BEC28 /* Assets.xcassets */,
 				4C6A2D0F25011F72002BEC28 /* LaunchScreen.storyboard */,
@@ -88,6 +101,19 @@
 				4C74FE93250675BC00A9746A /* Nosifer-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4C838E4B25092F210050C92B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				4C838E4C25092F210050C92B /* bubbles.mp3 */,
+				4C838E4D25092F210050C92B /* collect.wav */,
+				4C838E4E25092F210050C92B /* miss.wav */,
+				4C838E4F25092F210050C92B /* blob_mumble-2.wav */,
+				4C838E5025092F210050C92B /* blob_mumble-3.wav */,
+				4C838E5125092F210050C92B /* blob_mumble-1.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +175,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C74FE9425069C3100A9746A /* Nosifer-Regular.ttf in Resources */,
+				4C838E5425092F210050C92B /* miss.wav in Resources */,
+				4C838E5325092F210050C92B /* collect.wav in Resources */,
 				4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */,
+				4C838E5625092F210050C92B /* blob_mumble-3.wav in Resources */,
+				4C838E5525092F210050C92B /* blob_mumble-2.wav in Resources */,
 				4C6A2D0E25011F72002BEC28 /* Assets.xcassets in Resources */,
+				4C838E5725092F210050C92B /* blob_mumble-1.wav in Resources */,
+				4C838E5225092F210050C92B /* bubbles.mp3 in Resources */,
 				4C6A2D1125011F72002BEC28 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
