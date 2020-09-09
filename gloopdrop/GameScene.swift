@@ -213,7 +213,7 @@ class GameScene: SKScene {
         gloopFlow.zPosition = Layer.foreground.rawValue
         gloopFlow.position = CGPoint(x: 0.0, y: -60.0)
         // start endless scroll
-        gloopFlow.setUpScrollingView(imageNamed: "flow_1", layer: .foreground, blocks: 3, speed: 30.0)
+        gloopFlow.setUpScrollingView(imageNamed: "flow_1", layer: .foreground, emitterNamed: "GloopFlow.sks", blocks: 3, speed: 30.0)
         addChild(gloopFlow)
     }
 

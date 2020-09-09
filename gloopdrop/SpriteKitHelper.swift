@@ -29,7 +29,18 @@ enum PhysicsCategory {
 
 // MARK: - SKNode extensions
 extension SKNode {
-    func setUpScrollingView(imageNamed name: String, layer: Layer, blocks: Int, speed: TimeInterval) {
+    /// Sets up a endless scrolling view for a node
+    /// - Parameters:
+    ///   - name: The name of the image used for the scrolling view
+    ///   - layer: The layer at which the scroll should be
+    ///   - emitterNamed: (Optional) The emitter used for particle effects
+    ///   - blocks: The amount of blocks used for the scrolling view
+    ///   - speed: The speed of the scrolling
+    func setUpScrollingView(imageNamed name: String,
+                            layer: Layer,
+                            emitterNamed: String?,
+                            blocks: Int,
+                            speed: TimeInterval) {
         // create sprite nodes and set their position based on their # and width
         for i in 0..<blocks {
             let spriteNode = SKSpriteNode(imageNamed: name)
@@ -38,6 +49,13 @@ extension SKNode {
                                           y: 0)
             spriteNode.zPosition = layer.rawValue
             spriteNode.name = name
+
+            // set up optional particles
+            if let emitterNamed = emitterNamed,
+                let particles = SKEmitterNode(fileNamed: emitterNamed) {
+                particles.name = "particles"
+                spriteNode.addChild(particles)
+            }
 
             // use custom extension to scroll
             spriteNode.endlessScroll(speed: speed)
