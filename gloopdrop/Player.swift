@@ -90,6 +90,13 @@ class Player: SKSpriteNode {
                        restore: true)
     }
 
+    /// Plays a mumble sound
+    func mumble() {
+        let random = Int.random(in: 1...3)
+        let playSound = SKAction.playSoundFileNamed("blob_mumble-\(random).wav", waitForCompletion: true)
+        self.run(playSound, withKey: "mumble")
+    }
+
     /// Starts the "die" (game over) animation
     func die() {
         // check for textures

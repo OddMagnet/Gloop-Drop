@@ -31,11 +31,13 @@ class GameScene: SKScene {
     }
     var minDropSpeed: CGFloat = 0.12    // fastest drop speed
     var maxDropSpeed: CGFloat = 1.0     // slowest drop speed
+    var prevDropLocation: CGFloat = 0.0
     var dropsExpected: Int { return numberOfDrops }
     var dropsCollected: Int = 0
     // Labels
     var scoreLabel: SKLabelNode = SKLabelNode()
     var levelLabel: SKLabelNode = SKLabelNode()
+    var dropNumber: Int = 0
     // Audio
     let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
     let bubblesAudioNode = SKAudioNode(fileNamed: "bubbles.mp3")
@@ -56,9 +58,9 @@ class GameScene: SKScene {
         }
     }
     var dropSpeed: CGFloat {
-        var speed = 1.1 / (CGFloat(level) + (CGFloat(level) / CGFloat(numberOfDrops)))
-        if speed < minDropSpeed { speed = minDropSpeed }
-        else if speed > maxDropSpeed { speed = maxDropSpeed }
+        let speed = 1.1 / (CGFloat(level) + (CGFloat(level) / CGFloat(numberOfDrops)))
+        if speed < minDropSpeed { return minDropSpeed }
+        else if speed > maxDropSpeed { return maxDropSpeed }
         return speed
     }
 
@@ -91,6 +93,7 @@ class GameScene: SKScene {
         
         // set up background
         let background = SKSpriteNode(imageNamed: "background_1")
+        background.name = "background"
         background.anchorPoint = .zero
         background.zPosition = Layer.background.rawValue
         background.position = .zero
@@ -98,6 +101,7 @@ class GameScene: SKScene {
 
         // set up foreground
         let foreground = SKSpriteNode(imageNamed: "foreground_1")
+        foreground.name = "foreground"
         foreground.anchorPoint = .zero
         foreground.zPosition = Layer.foreground.rawValue
         foreground.position = .zero
@@ -105,6 +109,13 @@ class GameScene: SKScene {
         foreground.physicsBody = SKPhysicsBody(edgeLoopFrom: foreground.frame)
         foreground.physicsBody?.affectedByGravity = false
         addChild(foreground)
+
+        // set up the banner
+        let banner = SKSpriteNode(imageNamed: "banner")
+        banner.zPosition = Layer.background.rawValue + 1
+        banner.position = CGPoint(x: frame.midX, y: viewTop() - 20)
+        banner.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        addChild(banner)
 
         // set up physics categories for contacts
         foreground.physicsBody?.categoryBitMask = PhysicsCategory.foreground        // set the category the foreground belongs to
@@ -219,6 +230,9 @@ class GameScene: SKScene {
 
     // MARK: - Game functions
     func spawnMultipleGloops() {
+        // mumble
+        player.mumble()
+
         // start the player walking animation
         player.walk()
 
@@ -227,6 +241,12 @@ class GameScene: SKScene {
             score = 0
             level = 1
         }
+
+        // reset the collected drops count
+        dropsCollected = 0
+
+        // set the number for the drop label
+        dropNumber = numberOfDrops
 
         // set up repeating action
         let wait = SKAction.wait(forDuration: TimeInterval(dropSpeed))
@@ -252,7 +272,50 @@ class GameScene: SKScene {
         // set random position
         let margin = collectible.size.width * 2
         let dropRange = SKRange(lowerLimit: frame.minX + margin, upperLimit: frame.maxX - margin)
-        let randomX = CGFloat.random(in: dropRange.lowerLimit...dropRange.upperLimit)
+        var randomX = CGFloat.random(in: dropRange.lowerLimit...dropRange.upperLimit)
+
+        /* start of enhanced drop pattern */
+        // set a range
+        let lowerLimit = 50 + CGFloat(level)
+        let upperLimit = level <= 6
+                            ? 60 * CGFloat(level)
+                            : 400
+        let modifierRange = SKRange(lowerLimit: lowerLimit,
+                                     upperLimit: upperLimit)
+        let modifier = CGFloat.random(in: modifierRange.lowerLimit...modifierRange.upperLimit)
+
+        // set previous drop location
+        if prevDropLocation == 0.0 {
+            prevDropLocation = randomX
+        }
+
+        // clamp its x-position
+        if prevDropLocation < randomX {
+            randomX = prevDropLocation + modifier
+        } else {
+            randomX = prevDropLocation - modifier
+        }
+
+        // ensure the drop is within the frame
+        if randomX < dropRange.lowerLimit { randomX = dropRange.lowerLimit }
+        else if randomX > dropRange.upperLimit { randomX = dropRange.upperLimit }
+
+        // store the location
+        prevDropLocation = randomX
+        /* end of enhanced drop pattern */
+
+        // add number tag to the collectible
+        let label = SKLabelNode()
+        label.name = "dropNumber"
+        label.fontName = "AvenirNext-DemiBold"
+        label.fontColor = UIColor.yellow
+        label.fontSize = 22.0
+        label.text = String(dropNumber)
+        label.position = CGPoint(x: 0, y: 2)
+        collectible.addChild(label)
+
+        // decrease dropnumber
+        dropNumber -= 1
 
         // set up the drop
         collectible.position = CGPoint(x: randomX, y: player.position.y * 2.5)
@@ -262,7 +325,7 @@ class GameScene: SKScene {
 
     func checkForRemainingDrops() {
         if dropsCollected == dropsExpected {
-            print("next level")
+//            print("next level")
             nextLevel()
         }
     }
@@ -342,9 +405,12 @@ class GameScene: SKScene {
             spawnMultipleGloops()
             return
         }
-        let touchedNode = atPoint(position)
-        if touchedNode.name == "player" {
-            movingPlayer = true
+        let touchedNodes = nodes(at: position)
+        for node in touchedNodes {
+//            print("Touched node: \(String(describing: node.name))")
+            if node.name == "player" {
+                movingPlayer = true
+            }
         }
     }
 

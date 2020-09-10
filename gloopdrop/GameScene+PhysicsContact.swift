@@ -26,8 +26,29 @@ extension GameScene: SKPhysicsContactDelegate {
                 dropsCollected += 1
                 score += level
                 checkForRemainingDrops()
+
+                // add chomp text at the players position
+                let chomp = SKLabelNode(fontNamed: "Nosifer")
+                chomp.name = "chomp"
+                chomp.fontSize = 22.0
+                chomp.text = "gloop"
+                chomp.horizontalAlignmentMode = .center
+                chomp.verticalAlignmentMode = .bottom
+                chomp.position = CGPoint(x: player.position.x,
+                                         y: player.frame.maxY + 25)
+                chomp.zRotation = CGFloat.random(in: -0.15...0.15)
+                addChild(chomp)
+
+                // add actions to fade in, rise up and fade out
+                let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 0.05)
+                let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: 0.45)
+                let moveUp = SKAction.moveBy(x: 0, y: 45, duration: 0.45)
+                let groupAction = SKAction.group([fadeOut, moveUp])
+                let removeFromParent = SKAction.removeFromParent()
+                let chompAction = SKAction.sequence([fadeIn, groupAction, removeFromParent])
+                chomp.run(chompAction)
             }
-            print("Player hit collectible")
+//            print("Player hit collectible")
         }
         // or did the [Collectible] collide with the [Foreground]
         if collision == PhysicsCategory.foreground | PhysicsCategory.collectible {
@@ -35,7 +56,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 sprite.missed()
                 gameOver()
             }
-            print("Collectible hit foreground")
+//            print("Collectible hit foreground")
         }
     }
 }
