@@ -142,6 +142,11 @@ class GameScene: SKScene {
         // set up stars
         setUpStars()
 
+        // start sending robots
+        let wait = SKAction.wait(forDuration: 30, withRange: 60)
+        let startSendingRobots = SKAction.run(self.sendRobots)
+        run(.sequence([wait, startSendingRobots]))
+
         // show message
         showMessage("Tap to start the game")
 
@@ -212,12 +217,6 @@ class GameScene: SKScene {
                 .removeFromParent()
             ]))
         }
-//        if let messageLabel = childNode(withName: "//message") as? SKLabelNode {
-//            messageLabel.run(.sequence([
-//                .fadeOut(withDuration: 0.25),
-//                .removeFromParent()
-//            ]))
-//        }
     }
 
     // MARK: - Particle effects
@@ -332,6 +331,48 @@ class GameScene: SKScene {
         collectible.position = CGPoint(x: randomX, y: player.position.y * 2.5)
         addChild(collectible)
         collectible.drop(dropSpeed: 1.0, floorLevel: player.frame.minY)
+    }
+
+    func sendRobots() {
+        // set up robot
+        let robot = SKSpriteNode(imageNamed: "robot")
+        robot.zPosition = Layer.foreground.rawValue
+        robot.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        addChild(robot)
+
+        // decide from where to where the robot goes and set its starting position
+        var start = CGPoint(x: frame.minX - robot.size.width,
+                            y: frame.midY + robot.size.height)
+        var end = CGPoint(x: frame.maxX + robot.size.width,
+                            y: frame.midY + robot.size.height)
+        let rightToLeft = Bool.random()
+        if rightToLeft { (start, end) = (end, start); robot.xScale = -abs(xScale) }
+        robot.position = CGPoint(x: start.x, y: start.y)
+
+        // set up audio
+        let robotAudio = SKAudioNode(fileNamed: "robot.wav")
+        robotAudio.autoplayLooped = true
+        robotAudio.run(.changeVolume(to: 1.0, duration: 0.0))
+        robot.addChild(robotAudio)
+
+        // sequence for wobbling up and down
+        let moveUp = SKAction.moveBy(x: 0, y: 20, duration: 0.25)
+        let moveDown = SKAction.moveBy(x: 0, y: -20, duration: 0.25)
+        let wobbleGroup = SKAction.sequence([moveUp, moveDown])
+        let wobbleAction = SKAction.repeatForever(wobbleGroup)
+        robot.run(wobbleAction)
+
+        // actions for moving the robot across the screen and removing it from the scene
+        let move = SKAction.moveTo(x: end.x, duration: 6.50)
+        let removeFromParent = SKAction.removeFromParent()
+        let moveSequence = SKAction.sequence([move, removeFromParent])
+
+        // run the sequence and call this function periodically
+        robot.run(moveSequence, completion: {
+            let wait = SKAction.wait(forDuration: 30, withRange: 60)
+            let sendNewRobot = SKAction.run(self.sendRobots)
+            self.run(.sequence([wait, sendNewRobot]))
+        })
     }
 
     func checkForRemainingDrops() {
