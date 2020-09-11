@@ -232,13 +232,6 @@ class GameScene: SKScene {
     }
 
     func setUpStars() {
-        /*
-         if let emitterNamed = emitterNamed,
-         let particles = SKEmitterNode(fileNamed: emitterNamed) {
-         particles.name = "particles"
-         spriteNode.addChild(particles)
-         }
-         */
         if let starEmitter = SKEmitterNode(fileNamed: "Stars.sks") {
             starEmitter.name = "stars"
             starEmitter.position = CGPoint(x: frame.midX, y: frame.midY)

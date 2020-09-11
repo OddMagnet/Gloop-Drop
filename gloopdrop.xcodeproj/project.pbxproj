@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C0383DA250B9E9D0010ECFC /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C0383D9250B9E9D0010ECFC /* Stars.sks */; };
+		4C0383DD250BA0DF0010ECFC /* robot.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C0383DC250BA0DF0010ECFC /* robot.wav */; };
 		4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CC25026CEB00FCB4AB /* Player.swift */; };
 		4C1AF1CF25026D5700FCB4AB /* SpriteKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */; };
 		4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A604B2503C13500E66BCD /* Collectible.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		4C0383D9250B9E9D0010ECFC /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Stars.sks; sourceTree = "<group>"; };
+		4C0383DC250BA0DF0010ECFC /* robot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = robot.wav; sourceTree = "<group>"; };
 		4C1AF1CC25026CEB00FCB4AB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitHelper.swift; sourceTree = "<group>"; };
 		4C3A604B2503C13500E66BCD /* Collectible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		4C838E4B25092F210050C92B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				4C0383DC250BA0DF0010ECFC /* robot.wav */,
 				4C838E4C25092F210050C92B /* bubbles.mp3 */,
 				4C838E4D25092F210050C92B /* collect.wav */,
 				4C838E4E25092F210050C92B /* miss.wav */,
@@ -202,6 +205,7 @@
 				4C0383DA250B9E9D0010ECFC /* Stars.sks in Resources */,
 				4C74FE9425069C3100A9746A /* Nosifer-Regular.ttf in Resources */,
 				4C838E5C2509409F0050C92B /* GloopFlow.sks in Resources */,
+				4C0383DD250BA0DF0010ECFC /* robot.wav in Resources */,
 				4C838E5425092F210050C92B /* miss.wav in Resources */,
 				4C838E5325092F210050C92B /* collect.wav in Resources */,
 				4C6A2D0C25011F6D002BEC28 /* Main.storyboard in Resources */,
