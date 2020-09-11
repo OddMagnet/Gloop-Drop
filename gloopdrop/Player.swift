@@ -64,13 +64,13 @@ class Player: SKSpriteNode {
         crosshair.name = "crosshair"
         crosshair.position = CGPoint(x: 0.0, y: size.height * 2.12)
         crosshair.alpha = 0.25
-        self.addChild(crosshair)
+//        self.addChild(crosshair)
 
         // add controller
         let controller = SKSpriteNode(imageNamed: "controller")
         controller.name = "controller"
         controller.zPosition = Layer.player.rawValue
-        controller.position = CGPoint(x: 0, y: -51)
+        controller.position = CGPoint(x: 0, y: -70)
         self.addChild(controller)
 
         // add increased hitbox for controller
