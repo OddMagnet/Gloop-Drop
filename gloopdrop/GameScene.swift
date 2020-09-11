@@ -143,13 +143,12 @@ class GameScene: SKScene {
         setUpStars()
 
         // start sending robots
-        let wait = SKAction.wait(forDuration: 30, withRange: 60)
+        let wait = SKAction.wait(forDuration: 30, withRange: 30)
         let startSendingRobots = SKAction.run(self.sendRobots)
         run(.sequence([wait, startSendingRobots]))
 
         // show message
         showMessage("Tap to start the game")
-
     }
 
     func setUpLabels() {
@@ -369,7 +368,7 @@ class GameScene: SKScene {
 
         // run the sequence and call this function periodically
         robot.run(moveSequence, completion: {
-            let wait = SKAction.wait(forDuration: 30, withRange: 60)
+            let wait = SKAction.wait(forDuration: 30, withRange: 30)
             let sendNewRobot = SKAction.run(self.sendRobots)
             self.run(.sequence([wait, sendNewRobot]))
         })
