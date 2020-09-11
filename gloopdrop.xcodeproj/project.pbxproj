@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0383DA250B9E9D0010ECFC /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C0383D9250B9E9D0010ECFC /* Stars.sks */; };
 		4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CC25026CEB00FCB4AB /* Player.swift */; };
 		4C1AF1CF25026D5700FCB4AB /* SpriteKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */; };
 		4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A604B2503C13500E66BCD /* Collectible.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C0383D9250B9E9D0010ECFC /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Stars.sks; sourceTree = "<group>"; };
 		4C1AF1CC25026CEB00FCB4AB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitHelper.swift; sourceTree = "<group>"; };
 		4C3A604B2503C13500E66BCD /* Collectible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
@@ -63,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C0383DB250B9EA30010ECFC /* Particle Effects */ = {
+			isa = PBXGroup;
+			children = (
+				4C838E5B2509409F0050C92B /* GloopFlow.sks */,
+				4C0383D9250B9E9D0010ECFC /* Stars.sks */,
+			);
+			path = "Particle Effects";
+			sourceTree = "<group>";
+		};
 		4C6A2CF425011F6D002BEC28 = {
 			isa = PBXGroup;
 			children = (
@@ -90,7 +101,7 @@
 				4C3A604B2503C13500E66BCD /* Collectible.swift */,
 				4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */,
 				4C6A2D0A25011F6D002BEC28 /* Main.storyboard */,
-				4C838E5B2509409F0050C92B /* GloopFlow.sks */,
+				4C0383DB250B9EA30010ECFC /* Particle Effects */,
 				4C838E582509312F0050C92B /* Music */,
 				4C838E4B25092F210050C92B /* Sounds */,
 				4C74FE922506756F00A9746A /* Fonts */,
@@ -188,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C0383DA250B9E9D0010ECFC /* Stars.sks in Resources */,
 				4C74FE9425069C3100A9746A /* Nosifer-Regular.ttf in Resources */,
 				4C838E5C2509409F0050C92B /* GloopFlow.sks in Resources */,
 				4C838E5425092F210050C92B /* miss.wav in Resources */,
