@@ -459,7 +459,7 @@ class GameScene: SKScene {
         let touchedNodes = nodes(at: position)
         for node in touchedNodes {
 //            print("Touched node: \(String(describing: node.name))")
-            if node.name == "player" {
+            if node.name == "player" || node.name == "controller" {
                 movingPlayer = true
             }
         }

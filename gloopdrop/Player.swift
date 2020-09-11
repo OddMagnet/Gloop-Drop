@@ -58,6 +58,32 @@ class Player: SKSpriteNode {
         self.physicsBody?.categoryBitMask = PhysicsCategory.player          // set the category the player belongs to
         self.physicsBody?.contactTestBitMask = PhysicsCategory.collectible  // only care about contact with collectibles
         self.physicsBody?.collisionBitMask = PhysicsCategory.none           // ignore collisions completely
+
+        // add crosshair
+        let crosshair = SKSpriteNode(imageNamed: "crosshair")
+        crosshair.name = "crosshair"
+        crosshair.position = CGPoint(x: 0.0, y: size.height * 2.12)
+        crosshair.alpha = 0.25
+        self.addChild(crosshair)
+
+        // add controller
+        let controller = SKSpriteNode(imageNamed: "controller")
+        controller.name = "controller"
+        controller.zPosition = Layer.player.rawValue
+        controller.position = CGPoint(x: 0, y: -51)
+        self.addChild(controller)
+
+        // add increased hitbox for controller
+        let controllerBox = SKShapeNode(rect: CGRect(x: -self.size.width / 1.5,
+                                                     y: 0.0,
+                                                     width: self.size.width * 1.5,
+                                                     height: self.size.height * 1.5))
+        controllerBox.name = "controller"
+        controllerBox.fillColor = .clear
+        controllerBox.alpha = 1.0
+        controllerBox.strokeColor = .clear
+        controllerBox.zPosition = Layer.player.rawValue
+        self.addChild(controllerBox)
     }
 
     required init?(coder aDecoder: NSCoder) {
