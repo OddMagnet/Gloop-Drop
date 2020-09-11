@@ -139,6 +139,9 @@ class GameScene: SKScene {
         // set up gloop flow
         setUpGloopFlow()
 
+        // set up stars
+        setUpStars()
+
         // show message
         showMessage("Tap to start the game")
 
@@ -217,7 +220,7 @@ class GameScene: SKScene {
 //        }
     }
 
-    // MARK: - Gloop Flow & Particle effects
+    // MARK: - Particle effects
     func setUpGloopFlow() {
         let gloopFlow = SKNode()
         gloopFlow.name = "gloopFlow"
@@ -226,6 +229,21 @@ class GameScene: SKScene {
         // start endless scroll
         gloopFlow.setUpScrollingView(imageNamed: "flow_1", layer: .foreground, emitterNamed: "GloopFlow.sks", blocks: 3, speed: 30.0)
         addChild(gloopFlow)
+    }
+
+    func setUpStars() {
+        /*
+         if let emitterNamed = emitterNamed,
+         let particles = SKEmitterNode(fileNamed: emitterNamed) {
+         particles.name = "particles"
+         spriteNode.addChild(particles)
+         }
+         */
+        if let starEmitter = SKEmitterNode(fileNamed: "Stars.sks") {
+            starEmitter.name = "stars"
+            starEmitter.position = CGPoint(x: frame.midX, y: frame.midY)
+            addChild(starEmitter)
+        }
     }
 
     // MARK: - Game functions
