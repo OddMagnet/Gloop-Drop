@@ -3,12 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4C0383DA250B9E9D0010ECFC /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C0383D9250B9E9D0010ECFC /* Stars.sks */; };
 		4C0383DD250BA0DF0010ECFC /* robot.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4C0383DC250BA0DF0010ECFC /* robot.wav */; };
+		4C04DAA9250D002C00616AE3 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA3250D002C00616AE3 /* PromisesObjC.xcframework */; };
+		4C04DAAB250D002C00616AE3 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA4250D002C00616AE3 /* GoogleMobileAds.framework */; };
+		4C04DAAD250D002C00616AE3 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA5250D002C00616AE3 /* nanopb.xcframework */; };
+		4C04DAAF250D002C00616AE3 /* UserMessagingPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA6250D002C00616AE3 /* UserMessagingPlatform.framework */; };
+		4C04DAB1250D002C00616AE3 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA7250D002C00616AE3 /* GoogleUtilities.xcframework */; };
+		4C04DAB3250D002C00616AE3 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA8250D002C00616AE3 /* GoogleAppMeasurement.framework */; };
 		4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CC25026CEB00FCB4AB /* Player.swift */; };
 		4C1AF1CF25026D5700FCB4AB /* SpriteKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */; };
 		4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A604B2503C13500E66BCD /* Collectible.swift */; };
@@ -33,6 +39,12 @@
 /* Begin PBXFileReference section */
 		4C0383D9250B9E9D0010ECFC /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Stars.sks; sourceTree = "<group>"; };
 		4C0383DC250BA0DF0010ECFC /* robot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = robot.wav; sourceTree = "<group>"; };
+		4C04DAA3250D002C00616AE3 /* PromisesObjC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PromisesObjC.xcframework; path = gloopdrop/AdMob/PromisesObjC.xcframework; sourceTree = "<group>"; };
+		4C04DAA4250D002C00616AE3 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = gloopdrop/AdMob/GoogleMobileAds.framework; sourceTree = "<group>"; };
+		4C04DAA5250D002C00616AE3 /* nanopb.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = nanopb.xcframework; path = gloopdrop/AdMob/nanopb.xcframework; sourceTree = "<group>"; };
+		4C04DAA6250D002C00616AE3 /* UserMessagingPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserMessagingPlatform.framework; path = gloopdrop/AdMob/UserMessagingPlatform.framework; sourceTree = "<group>"; };
+		4C04DAA7250D002C00616AE3 /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleUtilities.xcframework; path = gloopdrop/AdMob/GoogleUtilities.xcframework; sourceTree = "<group>"; };
+		4C04DAA8250D002C00616AE3 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = gloopdrop/AdMob/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		4C1AF1CC25026CEB00FCB4AB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitHelper.swift; sourceTree = "<group>"; };
 		4C3A604B2503C13500E66BCD /* Collectible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
@@ -61,6 +73,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C04DAB1250D002C00616AE3 /* GoogleUtilities.xcframework in Frameworks */,
+				4C04DAAD250D002C00616AE3 /* nanopb.xcframework in Frameworks */,
+				4C04DAB3250D002C00616AE3 /* GoogleAppMeasurement.framework in Frameworks */,
+				4C04DAAF250D002C00616AE3 /* UserMessagingPlatform.framework in Frameworks */,
+				4C04DAAB250D002C00616AE3 /* GoogleMobileAds.framework in Frameworks */,
+				4C04DAA9250D002C00616AE3 /* PromisesObjC.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,11 +94,25 @@
 			path = "Particle Effects";
 			sourceTree = "<group>";
 		};
+		4C04DAA2250D002C00616AE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C04DAA8250D002C00616AE3 /* GoogleAppMeasurement.framework */,
+				4C04DAA4250D002C00616AE3 /* GoogleMobileAds.framework */,
+				4C04DAA7250D002C00616AE3 /* GoogleUtilities.xcframework */,
+				4C04DAA5250D002C00616AE3 /* nanopb.xcframework */,
+				4C04DAA3250D002C00616AE3 /* PromisesObjC.xcframework */,
+				4C04DAA6250D002C00616AE3 /* UserMessagingPlatform.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4C6A2CF425011F6D002BEC28 = {
 			isa = PBXGroup;
 			children = (
 				4C6A2CFF25011F6D002BEC28 /* gloopdrop */,
 				4C6A2CFE25011F6D002BEC28 /* Products */,
+				4C04DAA2250D002C00616AE3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -379,12 +411,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = K5ZJLTFVCL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/gloopdrop/AdMob",
+				);
 				INFOPLIST_FILE = gloopdrop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.oddmagnet.gloopdrop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -399,12 +436,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = K5ZJLTFVCL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/gloopdrop/AdMob",
+				);
 				INFOPLIST_FILE = gloopdrop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.oddmagnet.gloopdrop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
