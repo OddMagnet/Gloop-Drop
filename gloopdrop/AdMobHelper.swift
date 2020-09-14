@@ -9,6 +9,78 @@
 import Foundation
 import GoogleMobileAds
 
+struct AdMobHelper {
+    static let bannerAdDisplayTime: TimeInterval = 30
+    static let bannerAdID = "ca-app-pub-3940256099942544/2934735716"
+}
+
+fileprivate var _adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+
+extension GameViewController {
+    // MARK: - Properties
+    var adBannerView: GADBannerView {
+        get {
+            return _adBannerView
+        }
+        set {
+            _adBannerView = newValue
+        }
+    }
+
+    // set up banner ads
+    func setUpBannerAdsWith(id: String) {
+        // set up the banner view
+        adBannerView.adUnitID = id
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        // add it to the view
+        addBannerViewToView(adBannerView)
+
+        // start serving ads
+        startServingAds(after: AdMobHelper.bannerAdDisplayTime)
+    }
+
+    // add the banner to a view
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        // set up constraints programmatically
+        NSLayoutConstraint.activate([
+            bannerView.topAnchor.constraint(equalTo: view.topAnchor),
+            bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
+    // start serving ads using a scheduled timer
+    func startServingAds(after seconds: TimeInterval) {
+        Timer.scheduledTimer(timeInterval: seconds,
+                             target: self,
+                             selector: #selector(requestAds(_:)),
+                             userInfo: adBannerView,
+                             repeats: false)
+    }
+
+    // start serving banner ads
+    @objc func requestAds(_ timer: Timer) {
+        let bannerView = timer.userInfo as? GADBannerView
+        let request = GADRequest()
+        bannerView?.load(request)
+
+        timer.invalidate()
+    }
+
+    // hide banner
+    @objc func hideBanner(_ timer: Timer) {
+        let bannerView = timer.userInfo as! GADBannerView
+        UIView.animate(withDuration: 0.5) {
+            bannerView.alpha = 0.0
+        }
+
+        timer.invalidate()
+    }
+}
+
 // MARK: - DELEGATE EXTENSIONS
 
 /* ############################################################ */
@@ -22,6 +94,17 @@ extension GameViewController : GADBannerViewDelegate {
   /// Tells the delegate an ad request loaded an ad.
   func adViewDidReceiveAd(_ bannerView: GADBannerView) {
     print("adViewDidReceiveAd")
+    adBannerView = bannerView
+    UIView.animate(withDuration: 0.5, animations: { [weak self] in
+        self?.adBannerView.alpha = 1.0
+    })
+
+    // auto-hide banner
+    Timer.scheduledTimer(timeInterval: AdMobHelper.bannerAdDisplayTime,
+                         target: self,
+                         selector: #selector(hideBanner(_:)),
+                         userInfo: bannerView,
+                         repeats: false)
   }
   
   /// Tells the delegate an ad request failed.
