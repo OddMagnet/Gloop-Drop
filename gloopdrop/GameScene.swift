@@ -46,7 +46,11 @@ class GameScene: SKScene {
     let watchAdButton = SKSpriteNode(imageNamed: "watchAd")
     let continueGameButton = SKSpriteNode(imageNamed: "continueRemaining-0")
     let maxNumberOfContinues = 6
-    var numberOfFreeContinues: Int = 0
+    var numberOfFreeContinues: Int = 1 {
+        didSet {
+            updateContinueButton()
+        }
+    }
     var isContinue: Bool = false
 
     // MARK: - Computed properties
@@ -157,7 +161,7 @@ class GameScene: SKScene {
         run(.sequence([wait, startSendingRobots]))
 
         // show message
-        showMessage("Tap to start the game")
+        showMessage("Tap start to Play the Game")
     }
 
     func setUpLabels() {
@@ -251,7 +255,7 @@ class GameScene: SKScene {
         }
     }
 
-    // MARK: - Particle effects
+    // MARK: - Particle & Extra effects
     func setUpGloopFlow() {
         let gloopFlow = SKNode()
         gloopFlow.name = "gloopFlow"
@@ -270,18 +274,64 @@ class GameScene: SKScene {
         }
     }
 
+    func sendRobots() {
+        // set up robot
+        let robot = SKSpriteNode(imageNamed: "robot")
+        robot.zPosition = Layer.foreground.rawValue
+        robot.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        addChild(robot)
+
+        // decide from where to where the robot goes and set its starting position
+        var start = CGPoint(x: frame.minX - robot.size.width,
+                            y: frame.midY + robot.size.height)
+        var end = CGPoint(x: frame.maxX + robot.size.width,
+                          y: frame.midY + robot.size.height)
+        let rightToLeft = Bool.random()
+        if rightToLeft { (start, end) = (end, start); robot.xScale = -abs(xScale) }
+        robot.position = CGPoint(x: start.x, y: start.y)
+
+        // set up audio
+        let robotAudio = SKAudioNode(fileNamed: "robot.wav")
+        robotAudio.autoplayLooped = true
+        robotAudio.run(.changeVolume(to: 1.0, duration: 0.0))
+        robot.addChild(robotAudio)
+
+        // sequence for wobbling up and down
+        let moveUp = SKAction.moveBy(x: 0, y: 20, duration: 0.25)
+        let moveDown = SKAction.moveBy(x: 0, y: -20, duration: 0.25)
+        let wobbleGroup = SKAction.sequence([moveUp, moveDown])
+        let wobbleAction = SKAction.repeatForever(wobbleGroup)
+        robot.run(wobbleAction)
+
+        // actions for moving the robot across the screen and removing it from the scene
+        let move = SKAction.moveTo(x: end.x, duration: 6.50)
+        let removeFromParent = SKAction.removeFromParent()
+        let moveSequence = SKAction.sequence([move, removeFromParent])
+
+        // run the sequence and call this function periodically
+        robot.run(moveSequence, completion: {
+            let wait = SKAction.wait(forDuration: 30, withRange: 30)
+            let sendNewRobot = SKAction.run(self.sendRobots)
+            self.run(.sequence([wait, sendNewRobot]))
+        })
+    }
+
     // MARK: - Game functions
     func spawnMultipleGloops() {
-        // mumble
+        // hide message and start button
+        hideMessage()
+        hideStartButton()
+
+        // start player animations
+        player.walk()
         player.mumble()
 
-        // start the player walking animation
-        player.walk()
-
         // reset level and score
-        if gameInProgess == false {
+        if gameInProgess == false && isContinue == false {
             score = 0
             level = 1
+        } else {
+            isContinue = false
         }
 
         // reset the collected drops count
@@ -303,10 +353,6 @@ class GameScene: SKScene {
 
         // update game state
         gameInProgess = true
-
-        // hide message and start button
-        hideMessage()
-        hideStartButton()
     }
 
     func spawnGloop() {
@@ -366,48 +412,6 @@ class GameScene: SKScene {
         collectible.drop(dropSpeed: 1.0, floorLevel: player.frame.minY)
     }
 
-    func sendRobots() {
-        // set up robot
-        let robot = SKSpriteNode(imageNamed: "robot")
-        robot.zPosition = Layer.foreground.rawValue
-        robot.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        addChild(robot)
-
-        // decide from where to where the robot goes and set its starting position
-        var start = CGPoint(x: frame.minX - robot.size.width,
-                            y: frame.midY + robot.size.height)
-        var end = CGPoint(x: frame.maxX + robot.size.width,
-                            y: frame.midY + robot.size.height)
-        let rightToLeft = Bool.random()
-        if rightToLeft { (start, end) = (end, start); robot.xScale = -abs(xScale) }
-        robot.position = CGPoint(x: start.x, y: start.y)
-
-        // set up audio
-        let robotAudio = SKAudioNode(fileNamed: "robot.wav")
-        robotAudio.autoplayLooped = true
-        robotAudio.run(.changeVolume(to: 1.0, duration: 0.0))
-        robot.addChild(robotAudio)
-
-        // sequence for wobbling up and down
-        let moveUp = SKAction.moveBy(x: 0, y: 20, duration: 0.25)
-        let moveDown = SKAction.moveBy(x: 0, y: -20, duration: 0.25)
-        let wobbleGroup = SKAction.sequence([moveUp, moveDown])
-        let wobbleAction = SKAction.repeatForever(wobbleGroup)
-        robot.run(wobbleAction)
-
-        // actions for moving the robot across the screen and removing it from the scene
-        let move = SKAction.moveTo(x: end.x, duration: 6.50)
-        let removeFromParent = SKAction.removeFromParent()
-        let moveSequence = SKAction.sequence([move, removeFromParent])
-
-        // run the sequence and call this function periodically
-        robot.run(moveSequence, completion: {
-            let wait = SKAction.wait(forDuration: 30, withRange: 30)
-            let sendNewRobot = SKAction.run(self.sendRobots)
-            self.run(.sequence([wait, sendNewRobot]))
-        })
-    }
-
     func checkForRemainingDrops() {
         if dropsCollected == dropsExpected {
 //            print("next level")
@@ -428,7 +432,7 @@ class GameScene: SKScene {
 
     func gameOver() {
         // show message
-        showMessage("Game Over\nTap to try again")
+        showMessage("Game Over\nStart a New Game or Continue")
 
         // update game state
         gameInProgess = false
@@ -492,9 +496,15 @@ class GameScene: SKScene {
         for node in touchedNodes {
             if (node.name == "player" || node.name == "controller") && gameInProgess {
                 movingPlayer = true
-            } else if node.name == "start" && !gameInProgess {
-                spawnMultipleGloops()
+            } else if node == watchAdButton && !gameInProgess {
+                // TODO: Add call to gameSceneDelegate?.showRewardVideo()
                 return
+            } else if node == continueGameButton && !gameInProgess {
+                print("Continue Button pressed")
+                useContinue()
+                return
+            } else if node == startGameButton && !gameInProgess {
+                spawnMultipleGloops()
             }
         }
     }
