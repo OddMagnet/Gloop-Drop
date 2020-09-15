@@ -41,6 +41,8 @@ class GameScene: SKScene {
     // Audio
     let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
     let bubblesAudioNode = SKAudioNode(fileNamed: "bubbles.mp3")
+    // UI
+    let startGameButton = SKSpriteNode(imageNamed: "start")
 
     // MARK: - Computed properties
     var numberOfDrops: Int {
@@ -124,6 +126,7 @@ class GameScene: SKScene {
 
         // set up user interface
         setUpLabels()
+        setUpStartButton()
 
         // set up player
         // initially place the player sprite centered horizontally and on top of the foreground node
@@ -181,11 +184,35 @@ class GameScene: SKScene {
         addChild(levelLabel)
     }
 
+    func setUpStartButton() {
+        startGameButton.name = "start"
+        startGameButton.setScale(0.55)
+        startGameButton.zPosition = Layer.ui.rawValue
+        startGameButton.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(startGameButton)
+
+        // add animation
+        let scaleUp = SKAction.scale(to: 0.55, duration: 0.65)
+        let scaleDown = SKAction.scale(to: 0.50, duration: 0.65)
+        let playBounce = SKAction.sequence([scaleDown, scaleUp])
+        let bounceRepeat = SKAction.repeatForever(playBounce)
+        startGameButton.run(bounceRepeat)
+    }
+
+    func showStartButton() {
+        startGameButton.run(.fadeIn(withDuration: 0.25))
+    }
+
+    func hideStartButton() {
+        startGameButton.run(.fadeOut(withDuration: 0.25))
+    }
+
     func showMessage(_ message: String) {
         // set up message label
         let messageLabel = SKLabelNode()
         messageLabel.name = "message"
-        messageLabel.position = CGPoint(x: frame.midX, y: player.frame.maxY + 100)
+        messageLabel.position = CGPoint(x: frame.midX,
+                                        y: frame.midY + startGameButton.size.height / 2)
         messageLabel.zPosition = Layer.ui.rawValue
         messageLabel.numberOfLines = 2
 
@@ -271,8 +298,9 @@ class GameScene: SKScene {
         // update game state
         gameInProgess = true
 
-        // hide message
+        // hide message and start button
         hideMessage()
+        hideStartButton()
     }
 
     func spawnGloop() {
@@ -415,6 +443,7 @@ class GameScene: SKScene {
         // Reset game
         resetPlayerPosition()
         popRemainingDrops()
+        showStartButton()
         dropsCollected = 0
     }
 
@@ -452,15 +481,14 @@ class GameScene: SKScene {
 //            ? .left
 //            : .right
 //        player.moveTo(position, direction: direction, speed: speed)
-        if gameInProgess == false {
-            spawnMultipleGloops()
-            return
-        }
+
         let touchedNodes = nodes(at: position)
         for node in touchedNodes {
-//            print("Touched node: \(String(describing: node.name))")
-            if node.name == "player" || node.name == "controller" {
+            if (node.name == "player" || node.name == "controller") && gameInProgess {
                 movingPlayer = true
+            } else if node.name == "start" && !gameInProgess {
+                spawnMultipleGloops()
+                return
             }
         }
     }
