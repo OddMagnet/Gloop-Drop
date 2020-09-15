@@ -16,6 +16,7 @@
 		4C04DAB1250D002C00616AE3 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA7250D002C00616AE3 /* GoogleUtilities.xcframework */; };
 		4C04DAB3250D002C00616AE3 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C04DAA8250D002C00616AE3 /* GoogleAppMeasurement.framework */; };
 		4C04DAB7250D018500616AE3 /* AdMobHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C04DAB6250D018500616AE3 /* AdMobHelper.swift */; };
+		4C04DAB9251161DC00616AE3 /* GameScene+ContinueGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C04DAB8251161DC00616AE3 /* GameScene+ContinueGame.swift */; };
 		4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CC25026CEB00FCB4AB /* Player.swift */; };
 		4C1AF1CF25026D5700FCB4AB /* SpriteKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */; };
 		4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A604B2503C13500E66BCD /* Collectible.swift */; };
@@ -47,6 +48,7 @@
 		4C04DAA7250D002C00616AE3 /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleUtilities.xcframework; path = gloopdrop/AdMob/GoogleUtilities.xcframework; sourceTree = "<group>"; };
 		4C04DAA8250D002C00616AE3 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = gloopdrop/AdMob/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		4C04DAB6250D018500616AE3 /* AdMobHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdMobHelper.swift; sourceTree = "<group>"; };
+		4C04DAB8251161DC00616AE3 /* GameScene+ContinueGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+ContinueGame.swift"; sourceTree = "<group>"; };
 		4C1AF1CC25026CEB00FCB4AB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4C1AF1CE25026D5700FCB4AB /* SpriteKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitHelper.swift; sourceTree = "<group>"; };
 		4C3A604B2503C13500E66BCD /* Collectible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				4C6A2D0025011F6D002BEC28 /* AppDelegate.swift */,
 				4C6A2D0625011F6D002BEC28 /* GameScene.swift */,
+				4C04DAB8251161DC00616AE3 /* GameScene+ContinueGame.swift */,
 				4CA301B02504E31B00C070CE /* GameScene+PhysicsContact.swift */,
 				4C6A2D0825011F6D002BEC28 /* GameViewController.swift */,
 				4C1AF1CC25026CEB00FCB4AB /* Player.swift */,
@@ -265,6 +268,7 @@
 				4C1AF1CD25026CEB00FCB4AB /* Player.swift in Sources */,
 				4C6A2D0725011F6D002BEC28 /* GameScene.swift in Sources */,
 				4C3A604C2503C13500E66BCD /* Collectible.swift in Sources */,
+				4C04DAB9251161DC00616AE3 /* GameScene+ContinueGame.swift in Sources */,
 				4C6A2D0925011F6D002BEC28 /* GameViewController.swift in Sources */,
 				4C1AF1CF25026D5700FCB4AB /* SpriteKitHelper.swift in Sources */,
 				4C6A2D0125011F6D002BEC28 /* AppDelegate.swift in Sources */,

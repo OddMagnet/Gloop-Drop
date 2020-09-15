@@ -43,6 +43,11 @@ class GameScene: SKScene {
     let bubblesAudioNode = SKAudioNode(fileNamed: "bubbles.mp3")
     // UI
     let startGameButton = SKSpriteNode(imageNamed: "start")
+    let watchAdButton = SKSpriteNode(imageNamed: "watchAd")
+    let continueGameButton = SKSpriteNode(imageNamed: "continueRemaining-0")
+    let maxNumberOfContinues = 6
+    var numberOfFreeContinues: Int = 0
+    var isContinue: Bool = false
 
     // MARK: - Computed properties
     var numberOfDrops: Int {
@@ -127,6 +132,7 @@ class GameScene: SKScene {
         // set up user interface
         setUpLabels()
         setUpStartButton()
+        setUpContinues()
 
         // set up player
         // initially place the player sprite centered horizontally and on top of the foreground node
