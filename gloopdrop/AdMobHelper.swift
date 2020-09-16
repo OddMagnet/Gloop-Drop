@@ -11,10 +11,13 @@ import GoogleMobileAds
 
 struct AdMobHelper {
     static let bannerAdDisplayTime: TimeInterval = 30
-    static let bannerAdID = "ca-app-pub-3940256099942544/2934735716"
+    static let bannerAdTestID = "ca-app-pub-3940256099942544/2934735716"    // test id
+    static var rewardAdReady = false
+    static let rewardAdTestID = "ca-app-pub-3940256099942544/1712485313"    // test id
 }
 
 fileprivate var _adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+fileprivate var _rewardedAdView: GADRewardedAd?
 
 extension GameViewController {
     // MARK: - Properties
@@ -26,7 +29,16 @@ extension GameViewController {
             _adBannerView = newValue
         }
     }
+    var rewardedAdView: GADRewardedAd? {
+        get {
+            return _rewardedAdView
+        }
+        set {
+            _rewardedAdView = newValue
+        }
+    }
 
+    // MARK: - Banner ads
     // set up banner ads
     func setUpBannerAdsWith(id: String) {
         // set up the banner view
@@ -79,6 +91,30 @@ extension GameViewController {
 
         timer.invalidate()
     }
+
+    // MARK: - Rewarded Ads
+    // set up rewarded ads
+    func setUpRewardedAdsWith(id: String) {
+        // reset the ready flag
+        AdMobHelper.rewardAdReady = false
+
+        rewardedAdView = GADRewardedAd(adUnitID: id)
+        rewardedAdView?.load(GADRequest()) { error in
+            if let error = error {
+                print("Error in 'setUpRewardedAdsWith': \(error.localizedDescription)")
+            } else {
+                print("Rewarded Ad loaded properly")
+                AdMobHelper.rewardAdReady = true
+            }
+        }
+    }
+}
+
+// MARK: - Notifications Extension
+extension Notification.Name {
+    static let userDidEarnReward = Notification.Name("userDidEarnReward")
+    static let adDidOrWillPresent = Notification.Name("adDidOrWillPresent")
+    static let adDidOrWillDismiss = Notification.Name("adDidOrWillDismiss")
 }
 
 // MARK: - DELEGATE EXTENSIONS
@@ -119,16 +155,19 @@ extension GameViewController : GADBannerViewDelegate {
   /// to the user clicking on an ad.
   func adViewWillPresentScreen(_ bannerView: GADBannerView) {
     print("adViewWillPresentScreen")
+    NotificationCenter.default.post(name: .adDidOrWillPresent, object: nil)
   }
   
   /// Tells the delegate that the full-screen view will be dismissed.
   func adViewWillDismissScreen(_ bannerView: GADBannerView) {
     print("adViewWillDismissScreen")
+    NotificationCenter.default.post(name: .adDidOrWillDismiss, object: nil)
   }
   
   /// Tells the delegate that the full-screen view has been dismissed.
   func adViewDidDismissScreen(_ bannerView: GADBannerView) {
     print("adViewDidDismissScreen")
+    NotificationCenter.default.post(name: .adDidOrWillDismiss, object: nil)
   }
   
   /// Tells the delegate that a user click will open another app (such as
@@ -145,16 +184,20 @@ extension GameViewController: GADRewardedAdDelegate {
   /// Tells the delegate that the user earned a reward.
   func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
     print("Reward received: \(reward.type) | amount: \(reward.amount).")
+    NotificationCenter.default.post(name: .userDidEarnReward, object: reward)
   }
   
   /// Tells the delegate that the rewarded ad was presented.
   func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
     print("Rewarded ad presented.")
+    NotificationCenter.default.post(name: .adDidOrWillPresent, object: nil)
   }
   
   /// Tells the delegate that the rewarded ad was dismissed.
   func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
     print("Rewarded ad dismissed.")
+    setUpRewardedAdsWith(id: AdMobHelper.rewardAdTestID)
+    NotificationCenter.default.post(name: .adDidOrWillDismiss, object: nil)
   }
   
   /// Tells the delegate that the rewarded ad failed to present.
