@@ -19,6 +19,7 @@ class GameViewController: UIViewController {
         if let view = self.view as! SKView? {
             // Create the scene
             let scene = GameScene(size: CGSize(width: 1336, height: 1024))
+            scene.gameSceneDelegate = self
 
             // set the scale mode
             scene.scaleMode = .aspectFill
@@ -39,7 +40,8 @@ class GameViewController: UIViewController {
 //            view.showsNodeCount = true
 
             // start showing ads
-            setUpBannerAdsWith(id: AdMobHelper.bannerAdID)
+            setUpBannerAdsWith(id: AdMobHelper.bannerAdTestID)
+            setUpRewardedAdsWith(id: AdMobHelper.rewardAdTestID)
         }
     }
 
@@ -53,5 +55,13 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+}
+
+extension GameViewController: GameSceneDelegate {
+    func showRewardVideo() {
+        if rewardedAdView?.isReady == true {
+            rewardedAdView?.present(fromRootViewController: self, delegate: self)
+        }
     }
 }
