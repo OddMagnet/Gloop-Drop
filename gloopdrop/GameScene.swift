@@ -10,6 +10,10 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
+protocol GameSceneDelegate: AnyObject {
+    func showRewardVideo()
+}
+
 class GameScene: SKScene {
     // MARK: - Properties
     // Player
@@ -52,6 +56,8 @@ class GameScene: SKScene {
         }
     }
     var isContinue: Bool = false
+    // Delegate
+    weak var gameSceneDelegate: GameSceneDelegate?
 
     // MARK: - Computed properties
     var numberOfDrops: Int {
@@ -77,6 +83,9 @@ class GameScene: SKScene {
 
     // MARK: - Init
     override func didMove(to view: SKView) {
+        // set up notification observers
+        setUpAdMobObservers()
+
         // decrease audio engine's volume for later fade-in
         audioEngine.mainMixerNode.outputVolume = 0.0
 
@@ -210,11 +219,19 @@ class GameScene: SKScene {
     }
 
     func showStartButton() {
-        startGameButton.run(.fadeIn(withDuration: 0.25))
+        let showAction = SKAction.fadeIn(withDuration: 0.25)
+        startGameButton.run(showAction)
+        if AdMobHelper.rewardAdReady {
+            watchAdButton.run(showAction)
+        }
     }
 
     func hideStartButton() {
-        startGameButton.run(.fadeOut(withDuration: 0.25))
+        let hideAction = SKAction.fadeOut(withDuration: 0.25)
+        startGameButton.run(hideAction)
+        if AdMobHelper.rewardAdReady {
+            watchAdButton.run(hideAction)
+        }
     }
 
     func showMessage(_ message: String) {
@@ -497,7 +514,7 @@ class GameScene: SKScene {
             if (node.name == "player" || node.name == "controller") && gameInProgess {
                 movingPlayer = true
             } else if node == watchAdButton && !gameInProgess {
-                // TODO: Add call to gameSceneDelegate?.showRewardVideo()
+                gameSceneDelegate?.showRewardVideo()
                 return
             } else if node == continueGameButton && !gameInProgess {
                 print("Continue Button pressed")
