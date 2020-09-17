@@ -50,8 +50,12 @@ class GameScene: SKScene {
     let watchAdButton = SKSpriteNode(imageNamed: "watchAd")
     let continueGameButton = SKSpriteNode(imageNamed: "continueRemaining-0")
     let maxNumberOfContinues = 6
-    var numberOfFreeContinues: Int = 1 {
-        didSet {
+    var numberOfFreeContinues: Int {
+        get {
+            return GameData.shared.freeContinues
+        }
+        set {
+            GameData.shared.freeContinues = newValue
             updateContinueButton()
         }
     }
