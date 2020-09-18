@@ -13,6 +13,7 @@ import AVFoundation
 /// This part of the GameScene class contains everything related to setting up the UI
 extension GameScene {
 
+    /// Sets up the score and level labels for the game
     func setUpLabels() {
         // Score label
         scoreLabel.name = "score"
@@ -43,6 +44,7 @@ extension GameScene {
         addChild(levelLabel)
     }
 
+    /// Sets up the start button for the game and animates it
     func setUpStartButton() {
         startGameButton.name = "start"
         startGameButton.setScale(0.55)
@@ -58,6 +60,7 @@ extension GameScene {
         startGameButton.run(bounceRepeat)
     }
 
+    // fades in the start- and watchAd buttons
     func showStartButton() {
         let showAction = SKAction.fadeIn(withDuration: 0.25)
         startGameButton.run(showAction)
@@ -66,6 +69,7 @@ extension GameScene {
         }
     }
 
+    // fades out the start- and watchAd buttons
     func hideStartButton() {
         let hideAction = SKAction.fadeOut(withDuration: 0.25)
         startGameButton.run(hideAction)
@@ -74,6 +78,8 @@ extension GameScene {
         }
     }
 
+    /// Show a message label on screen
+    /// - Parameter message: The message to show
     func showMessage(_ message: String) {
         // set up message label
         let messageLabel = SKLabelNode()
@@ -102,8 +108,8 @@ extension GameScene {
         addChild(messageLabel)
     }
 
+    /// Removes the message label if it exists
     func hideMessage() {
-        // remove message label if it exists
         enumerateChildNodes(withName: "//message") { (node, _) in
             node.run(.sequence([
                 .fadeOut(withDuration: 0.25),
