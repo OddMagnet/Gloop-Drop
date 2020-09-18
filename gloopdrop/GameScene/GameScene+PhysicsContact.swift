@@ -11,6 +11,16 @@ import SpriteKit
 
 /// This part of the GameScene class contains the handling of physics, e.g. the player catching or missing the drops
 extension GameScene: SKPhysicsContactDelegate {
+    /// Handles the physics contacts of drops with the player and ground
+    ///
+    /// - Extracts the collectible body from the contact
+    /// - checks if it collided with the player
+    ///     - increases the collected drops and score
+    ///     - checks if all were collected and advances level if so
+    ///     - plays a 'chomp'  animation
+    /// - or with the ground
+    ///     - calls the `gameOver()` method
+    /// - Parameter contact: the contact that happened
     func didBegin(_ contact: SKPhysicsContact) {
         // Check collision bodies
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
@@ -49,7 +59,6 @@ extension GameScene: SKPhysicsContactDelegate {
                 let chompAction = SKAction.sequence([fadeIn, groupAction, removeFromParent])
                 chomp.run(chompAction)
             }
-//            print("Player hit collectible")
         }
         // or did the [Collectible] collide with the [Foreground]
         if collision == PhysicsCategory.foreground | PhysicsCategory.collectible {
@@ -57,7 +66,6 @@ extension GameScene: SKPhysicsContactDelegate {
                 sprite.missed()
                 gameOver()
             }
-//            print("Collectible hit foreground")
         }
     }
 }
