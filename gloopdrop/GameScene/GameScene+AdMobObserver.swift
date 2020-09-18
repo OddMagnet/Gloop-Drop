@@ -9,6 +9,7 @@
 import Foundation
 import GoogleMobileAds
 
+/// This part of the GameScene class contains the setup for AdMob observers
 extension GameScene {
     func setUpAdMobObservers() {
         // Add notification observers

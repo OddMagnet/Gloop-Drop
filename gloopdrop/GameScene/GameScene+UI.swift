@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
+/// This part of the GameScene class contains everything related to setting up the UI
 extension GameScene {
 
     func setUpLabels() {

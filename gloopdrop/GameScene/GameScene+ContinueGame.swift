@@ -9,6 +9,7 @@
 import Foundation
 import GameKit
 
+/// This part of the GameScene class contains functions related to the continue mechanic
 extension GameScene {
     // MARK: - Functions
     func setUpContinues() {

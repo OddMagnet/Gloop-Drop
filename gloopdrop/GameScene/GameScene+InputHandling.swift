@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
+/// This part of the GameScene class contains the handling of user input
 extension GameScene {
     
     // MARK: - Touch input handling

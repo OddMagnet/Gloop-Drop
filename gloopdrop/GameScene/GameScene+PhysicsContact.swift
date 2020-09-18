@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 
+/// This part of the GameScene class contains the handling of physics, e.g. the player catching or missing the drops
 extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         // Check collision bodies

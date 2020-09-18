@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
+/// This part of the GameScene class contains the functions for the game routine
 extension GameScene {
     
     // MARK: - Game functions
@@ -156,7 +157,7 @@ extension GameScene {
     func resetPlayerPosition() {
         let resetPoint = CGPoint(x: frame.midX, y: player.position.y)
         let distance = hypot(resetPoint.x - player.position.x, 0)
-        let speed = TimeInterval(distance / (playerMovementSpeed * 2)) / 255
+        let speed = TimeInterval(distance / (resetSpeed * 2)) / 255
         
         player.moveTo(resetPoint,
                       direction: player.position.x > frame.midX
