@@ -14,56 +14,37 @@ protocol GameSceneDelegate: AnyObject {
     func showRewardVideo()
 }
 
+/// This part of the GameScene class contains all properties and the initialization of the game
+/// About computed properties: Their comments are put in a way that displays same at the same height as others if the computed properties are collapsed
 class GameScene: SKScene {
-    // MARK: - Properties
-    // Player
-    let player = Player()
-    let playerMovementSpeed: CGFloat = 1.5
-    var movingPlayer = false
-    var lastPosition: CGPoint?
-    // Game
-    var gameInProgess = false
+    // MARK: - Player
+    let player = Player()                           // The player node
+    let resetSpeed: CGFloat = 1.5                   // constant that dictates how fast the player resets after failing a Level
+    var movingPlayer = false                        // set to true when the player node is touched, up until the touch ends.
+    var lastPosition: CGPoint?                      // used to check against new position to determine direction of the player node
+
+    // MARK: - Game
+    var gameInProgess = false                       // used to check if player should be able to move, if score&level need to be reset
+                                                    // and if certain UI Elements should show
     var level: Int = 1 {
         didSet {
             levelLabel.text = "Level \(level)"
         }
-    }
+    }                       // sets the text for the levelLabel
     var score: Int = 0 {
         didSet {
             scoreLabel.text = "Score \(score)"
         }
-    }
-    var minDropSpeed: CGFloat = 0.12    // fastest drop speed
-    var maxDropSpeed: CGFloat = 1.0     // slowest drop speed
-    var prevDropLocation: CGFloat = 0.0
-    var dropsExpected: Int { return numberOfDrops }
-    var dropsCollected: Int = 0
-    // Labels
-    var scoreLabel: SKLabelNode = SKLabelNode()
-    var levelLabel: SKLabelNode = SKLabelNode()
-    var dropNumber: Int = 0
-    // Audio
-    let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
-    let bubblesAudioNode = SKAudioNode(fileNamed: "bubbles.mp3")
-    // UI
-    let startGameButton = SKSpriteNode(imageNamed: "start")
-    let watchAdButton = SKSpriteNode(imageNamed: "watchAd")
-    let continueGameButton = SKSpriteNode(imageNamed: "continueRemaining-0")
-    let maxNumberOfContinues = 6
-    var numberOfFreeContinues: Int {
-        get {
-            return GameData.shared.freeContinues
-        }
-        set {
-            GameData.shared.freeContinues = newValue
-            updateContinueButton()
-        }
-    }
-    var isContinue: Bool = false
-    // Delegate
-    weak var gameSceneDelegate: GameSceneDelegate?
-
-    // MARK: - Computed properties
+    }                       // sets the text for the scoreLabel
+    var minDropSpeed: CGFloat = 0.12                // constant that dictates the fastest possible drop speed
+    var maxDropSpeed: CGFloat = 1.0                 // constant that dictates the slowest possible drop speed
+    var dropSpeed: CGFloat {
+        let speed = 1.1 / (CGFloat(level) + (CGFloat(level) / CGFloat(numberOfDrops)))
+        if speed < minDropSpeed { return minDropSpeed }
+        else if speed > maxDropSpeed { return maxDropSpeed }
+        return speed
+    }                   // computed property that returns the drop speed for the current level
+    var prevDropLocation: CGFloat = 0.0             // used to ensure that drops are not too far apart
     var numberOfDrops: Int {
         switch level {
             case 1...5:
@@ -77,19 +58,45 @@ class GameScene: SKScene {
             default:
                 return 150
         }
-    }
-    var dropSpeed: CGFloat {
-        let speed = 1.1 / (CGFloat(level) + (CGFloat(level) / CGFloat(numberOfDrops)))
-        if speed < minDropSpeed { return minDropSpeed }
-        else if speed > maxDropSpeed { return maxDropSpeed }
-        return speed
-    }
+    }                   // computed property that returns the number of drops for the current level
+    var dropsExpected: Int { return numberOfDrops } // computed property that returns the drops expected to be caught to advance the current level
+    var dropsCollected: Int = 0                     // counter for the current amount of collected drops
+    var dropNumber: Int = 0                         // used to display the number of the falling drops
+    let maxNumberOfContinues = 6                    // constant that dictactes how many free continues a player can have
+    var numberOfFreeContinues: Int {
+        get {
+            return GameData.shared.freeContinues
+        }
+        set {
+            GameData.shared.freeContinues = newValue
+            updateContinueButton()
+        }
+    }           // computed property that saves and load the amount of free continues
+    var isContinue: Bool = false                    // used to ensure that score and level don't get reset when the player uses a continue
+
+    // MARK: - Nodes
+    // Audio nodes
+    let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
+    let bubblesAudioNode = SKAudioNode(fileNamed: "bubbles.mp3")
+    // Label nodes
+    var scoreLabel: SKLabelNode = SKLabelNode()
+    var levelLabel: SKLabelNode = SKLabelNode()
+    // Sprites
+    let startGameButton = SKSpriteNode(imageNamed: "start")
+    let watchAdButton = SKSpriteNode(imageNamed: "watchAd")
+    let continueGameButton = SKSpriteNode(imageNamed: "continueRemaining-0")
+
+    // MARK: - Delegate
+    weak var gameSceneDelegate: GameSceneDelegate?
+
 
     // MARK: - Init
     override func didMove(to view: SKView) {
-        // set up notification observers
+        // MARK: Ads
         setUpAdMobObservers()
 
+
+        // MARK: Audio
         // decrease audio engine's volume for later fade-in
         audioEngine.mainMixerNode.outputVolume = 0.0
 
@@ -112,9 +119,8 @@ class GameScene: SKScene {
             self.addChild(self.bubblesAudioNode)
         })
 
-        // set up the physics world contact delegate
-        physicsWorld.contactDelegate = self
-        
+
+        // MARK: Sprites
         // set up background
         let background = SKSpriteNode(imageNamed: "background_1")
         background.name = "background"
@@ -129,6 +135,7 @@ class GameScene: SKScene {
         foreground.anchorPoint = .zero
         foreground.zPosition = Layer.foreground.rawValue
         foreground.position = .zero
+
         // add physics body
         foreground.physicsBody = SKPhysicsBody(edgeLoopFrom: foreground.frame)
         foreground.physicsBody?.affectedByGravity = false
@@ -141,39 +148,40 @@ class GameScene: SKScene {
         banner.anchorPoint = CGPoint(x: 0.5, y: 1.0)
         addChild(banner)
 
+
+        // MARK: Physics
+        // set up the physics world contact delegate
+        physicsWorld.contactDelegate = self
+
         // set up physics categories for contacts
         foreground.physicsBody?.categoryBitMask = PhysicsCategory.foreground        // set the category the foreground belongs to
         foreground.physicsBody?.contactTestBitMask = PhysicsCategory.collectible    // only care about conact with collectibles
         foreground.physicsBody?.collisionBitMask = PhysicsCategory.none             // ignore collisions completely
 
-        // set up user interface
+
+        //MARK: UI
         setUpLabels()
         setUpStartButton()
         setUpContinues()
 
-        // set up player
+
+        // MARK: Player
         // initially place the player sprite centered horizontally and on top of the foreground node
         player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
         player.setUpConstraints(floor: foreground.frame.maxY)
         addChild(player)
-        // start up the player animation
-//        player.walk()
 
-        // set up game
-//        spawnMultipleGloops()
 
-        // set up gloop flow
+        // MARK: Effects
         setUpGloopFlow()
-
-        // set up stars
         setUpStars()
-
         // start sending robots
         let wait = SKAction.wait(forDuration: 30, withRange: 30)
         let startSendingRobots = SKAction.run(self.sendRobots)
         run(.sequence([wait, startSendingRobots]))
 
-        // show message
+
+        // MARK: Game Start
         showMessage("Tap start to Play the Game")
     }
 }
