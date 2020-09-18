@@ -12,17 +12,16 @@ import AVFoundation
 
 /// This part of the GameScene class contains the handling of user input
 extension GameScene {
-    
-    // MARK: - Touch input handling
+
+    /// Handles touch inputs
+    ///
+    /// Handles touch inputs for
+    /// - moving the player
+    /// - starting the game
+    /// - watching an ad
+    /// - using a continue
+    /// - Parameter position: the position the touch(es) occured
     func touchDownAt(_ position: CGPoint) {
-        //        // calculate necessary speed based on current and new position
-        //        let distance = hypot(position.x - player.position.x, position.y - player.position.y)
-        //        let speed = TimeInterval(distance / playerMovementSpeed) / 255
-        //        let direction: PlayerDirection = position.x < player.position.x
-        //            ? .left
-        //            : .right
-        //        player.moveTo(position, direction: direction, speed: speed)
-        
         let touchedNodes = nodes(at: position)
         for node in touchedNodes {
             if (node.name == "player" || node.name == "controller") && gameInProgess {
@@ -39,7 +38,11 @@ extension GameScene {
             }
         }
     }
-    
+
+    /// Handles the moving of touches, aka dragging a finger across the screen
+    ///
+    /// Moves the player node across the screen and handles player direction
+    /// - Parameter position: the position the touch(es) moved to
     func touchMovedTo(_ position: CGPoint) {
         if movingPlayer {
             // clamp position
@@ -55,7 +58,11 @@ extension GameScene {
             lastPosition = newPosition
         }
     }
-    
+
+    /// Handles the stopping of a touch
+    ///
+    /// Stops player movement
+    /// - Parameter position: the position the touch stopped at
     func touchUpAt(_ position: CGPoint) {
         movingPlayer = false
     }
