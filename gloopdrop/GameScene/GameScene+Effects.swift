@@ -12,8 +12,8 @@ import AVFoundation
 
 /// This part of the GameScene class contains everything related to extra visual effects
 extension GameScene {
-    
-    // MARK: - Particle & Extra effects
+
+    /// Sets up the flow of gloop
     func setUpGloopFlow() {
         let gloopFlow = SKNode()
         gloopFlow.name = "gloopFlow"
@@ -23,7 +23,8 @@ extension GameScene {
         gloopFlow.setUpScrollingView(imageNamed: "flow_1", layer: .foreground, emitterNamed: "GloopFlow.sks", blocks: 3, speed: 30.0)
         addChild(gloopFlow)
     }
-    
+
+    /// Sets up the stars
     func setUpStars() {
         if let starEmitter = SKEmitterNode(fileNamed: "Stars.sks") {
             starEmitter.name = "stars"
@@ -31,7 +32,8 @@ extension GameScene {
             addChild(starEmitter)
         }
     }
-    
+
+    /// Periodically sends a robot flying through the scene
     func sendRobots() {
         // set up robot
         let robot = SKSpriteNode(imageNamed: "robot")
