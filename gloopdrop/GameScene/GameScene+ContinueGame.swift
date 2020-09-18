@@ -11,7 +11,7 @@ import GameKit
 
 /// This part of the GameScene class contains functions related to the continue mechanic
 extension GameScene {
-    // MARK: - Functions
+    /// Sets up the watchAd and continueGame buttons
     func setUpContinues() {
         watchAdButton.name = "watchAd"
         watchAdButton.setScale(0.75)
@@ -31,6 +31,7 @@ extension GameScene {
         updateContinueButton()
     }
 
+    /// Updates the image for the continue button
     func updateContinueButton() {
         if numberOfFreeContinues > maxNumberOfContinues {
             let texture = SKTexture(imageNamed: "continueRemaining-max")
@@ -41,6 +42,7 @@ extension GameScene {
         }
     }
 
+    /// Checks if there are continues left and uses one
     func useContinue() {
         if numberOfFreeContinues > 0 {
             isContinue = true
