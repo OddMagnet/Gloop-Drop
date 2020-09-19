@@ -93,6 +93,7 @@ class Collectible: SKSpriteNode {
         self.run(actionGroup)
     }
 
+    /// Animates the collectible splashing on the ground
     func missed() {
         let move = SKAction.moveBy(x: 0, y: -size.height/1.5, duration: 0.0)
         let splatX = SKAction.scaleX(to: 1.5, duration: 0.0) // make wider

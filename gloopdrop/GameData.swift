@@ -30,7 +30,10 @@ class GameData: NSObject, Codable {
     func setUpObservers() {
         // TODO: Add observers
     }
+    
     // MARK: - Save and load locally stored data
+    /// Saves the game data
+    /// - Parameter filename: the name under which the data is saved
     func saveDataWithFileName(_ filename: String) {
         let fullPath = getDocumentsDirectory().appendingPathComponent(filename)
 
@@ -44,6 +47,8 @@ class GameData: NSObject, Codable {
         }
     }
 
+    /// Loads the game data
+    /// - Parameter filename: the name of the file to load
     func loadDataWithFileName(_ filename: String) {
         let fullPath = getDocumentsDirectory().appendingPathComponent(filename)
 
@@ -60,6 +65,8 @@ class GameData: NSObject, Codable {
     }
 
     // MARK: - Helper
+    /// Returns the URL of the users documents directory
+    /// - Returns: the URL of the users documents directory
     fileprivate func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory,
                                              in: .userDomainMask)

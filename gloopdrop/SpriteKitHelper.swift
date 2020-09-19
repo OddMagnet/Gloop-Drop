@@ -27,7 +27,7 @@ enum PhysicsCategory {
     static let foreground:  UInt32 = 0b100  // 4
 }
 
-// MARK: - SKNode extensions
+// MARK: - SKNode extension
 extension SKNode {
     /// Sets up a endless scrolling view for a node
     /// - Parameters:
@@ -64,7 +64,7 @@ extension SKNode {
     }
 }
 
-// MARK: - SpriteKit extensions
+// MARK: - SpriteKitNode extension
 extension SKSpriteNode {
     /// Helper function to load an array of textures
     /// - Parameters:

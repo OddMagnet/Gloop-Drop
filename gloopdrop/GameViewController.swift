@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Create scene view which will present the scene
+        // Create view which will present the scene
         if let view = self.view as! SKView? {
             // Create the scene
             let scene = GameScene(size: CGSize(width: 1336, height: 1024))
@@ -33,7 +33,7 @@ class GameViewController: UIViewController {
             // present the scene
             view.presentScene(scene)
 
-            // set view options
+            // debugging option
 //            view.ignoresSiblingOrder = false
 //            view.showsPhysics = true
 //            view.showsFPS = true
@@ -59,6 +59,7 @@ class GameViewController: UIViewController {
 }
 
 extension GameViewController: GameSceneDelegate {
+    /// Checks if the ad is ready and presents it
     func showRewardVideo() {
         if rewardedAdView?.isReady == true {
             rewardedAdView?.present(fromRootViewController: self, delegate: self)

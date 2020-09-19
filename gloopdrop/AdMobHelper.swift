@@ -39,7 +39,8 @@ extension GameViewController {
     }
 
     // MARK: - Banner ads
-    // set up banner ads
+    /// Sets up banner ads
+    /// - Parameter id: the ID for the banner ads
     func setUpBannerAdsWith(id: String) {
         // set up the banner view
         adBannerView.adUnitID = id
@@ -53,7 +54,8 @@ extension GameViewController {
         startServingAds(after: AdMobHelper.bannerAdDisplayTime)
     }
 
-    // add the banner to a view
+    /// Adds a banner ad to the  view
+    /// - Parameter bannerView: the view of the ad
     func addBannerViewToView(_ bannerView: GADBannerView) {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bannerView)
@@ -64,7 +66,8 @@ extension GameViewController {
         ])
     }
 
-    // start serving ads using a scheduled timer
+    /// Starts serving ads
+    /// - Parameter seconds: the interval between ads
     func startServingAds(after seconds: TimeInterval) {
         Timer.scheduledTimer(timeInterval: seconds,
                              target: self,
@@ -73,7 +76,8 @@ extension GameViewController {
                              repeats: false)
     }
 
-    // start serving banner ads
+    /// Requests an ad
+    /// - Parameter timer: the timer containing the userInfo object of the banner
     @objc func requestAds(_ timer: Timer) {
         let bannerView = timer.userInfo as? GADBannerView
         let request = GADRequest()
@@ -82,7 +86,8 @@ extension GameViewController {
         timer.invalidate()
     }
 
-    // hide banner
+    /// Hides the banner
+    /// - Parameter timer: the timer containing the userinfo object of the banner
     @objc func hideBanner(_ timer: Timer) {
         let bannerView = timer.userInfo as! GADBannerView
         UIView.animate(withDuration: 0.5) {
@@ -93,7 +98,8 @@ extension GameViewController {
     }
 
     // MARK: - Rewarded Ads
-    // set up rewarded ads
+    /// Sets up rewarded ads
+    /// - Parameter id: the id for the rewarded ads
     func setUpRewardedAdsWith(id: String) {
         // reset the ready flag
         AdMobHelper.rewardAdReady = false
